@@ -1,6 +1,7 @@
 import pyrebase
+import curses
 
-def start_login():
+def start_login(stdscr):
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
         "authDomain": "teste-python-67d43.firebaseapp.com",
@@ -13,3 +14,11 @@ def start_login():
 
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
+
+    curses.echo()
+    user_name = stdscr.getstr(0,0,15)
+    user_password = stdscr.getstr(2,0,15)
+
+    stdscr.getch()
+
+curses.wrapper(start_login)
