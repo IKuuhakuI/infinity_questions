@@ -15,9 +15,14 @@ def start_login(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
+    stdscr.addstr(0,0,"Nome: ")
+    stdscr.addstr(1,0, "Senha: ")
+
     curses.echo()
-    user_name = stdscr.getstr(0,0,15)
-    user_password = stdscr.getstr(2,0,15)
+    user_name = stdscr.getstr(0,len("Nome: "),15)
+
+    curses.echo(False)
+    user_password = stdscr.getstr(1,len("Senha: "),15)
 
     stdscr.getch()
 
