@@ -3,6 +3,12 @@ import curses
 import time
 
 def start_login(stdscr):
+    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+
+    stdscr.attron(curses.color_pair(1))
+
+
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
         "authDomain": "teste-python-67d43.firebaseapp.com",
@@ -58,22 +64,27 @@ def start_login(stdscr):
 
         if current_user_name == user_name and current_user_pass == user_password:
             stdscr.clear()
-            stdscr.addstr(0,0,"Bem vindo")
-
-            stdscr.refresh()
-            stdscr.getch()
+            logged_in = True
 
             break
 
-        else:
-            stdscr.clear()
-            stdscr.addstr(0,0,user_name)
-            stdscr.addstr(1,0,user_password)
-            stdscr.addstr(2,0,current_user_name)
-            stdscr.addstr(3,0,current_user_pass)
-            stdscr.addstr(4,0, "nao logou")
-            stdscr.refresh()
-            stdscr.getch()
+    stdscr.clear()
+
+    x_mensagem = largura_tela//2 - len("Bem vindo") // 2
+    y_mensagem = altura_tela//2
+
+    if logged_in == True:
+        stdscr.addstr(y_mensagem,x_mensagem,"Bem vindo")
+        stdscr.addstr(y_mensagem + 1, x_mensagem + (len("Bem vindo") - len("Aperte qualquer coisa para continuar"))//2, "Aperte qualquer coisa para continuar")
+        stdscr.refresh()
+        stdscr.getch()
+
+
+    else:
+        stdscr.addstr(y_mensagem, x_mensagem + (len("Bem vindo") - len("ERRO AO EFETUAR LOGIN")) // 2,"ERRO AO EFETUAR LOGIN")
+        stdscr.addstr(y_mensagem + 1, x_mensagem + (len("Bem vindo")-len("Aperte qualquer coisa para continuar"))//2, "Aperte qualquer coisa para continuar")
+        stdscr.refresh()
+        stdscr.getch()
 
 
 curses.wrapper(start_login)
