@@ -90,5 +90,3 @@ def start_registrar(stdscr):
 	db_qtd_user.update(qtd_user)
 
 	stdscr.refresh()
-
-curses.wrapper(start_registrar)

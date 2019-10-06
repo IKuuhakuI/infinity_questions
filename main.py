@@ -3,6 +3,7 @@ import curses
 
 import menu
 import login
+import registrar
 
 def main(stdscr):
     # Menu com as opcoes de login
@@ -54,12 +55,16 @@ def main(stdscr):
                 login.start_login(stdscr)
                 curses.curs_set(False)
 
+            elif current_row_idx == 1:
+                curses.curs_set(True)
+                registrar.start_registrar(stdscr)
+                curses.curs_set(False)
+
             # Mensagem quando user escolhe alguma opcao
             else:
                 stdscr.addstr(0, 0, "Voce escolheu: {}" .format(menu_login[current_row_idx]))
 
             stdscr.refresh()
-            stdscr.getch()
 
         # Atualiza o menu
         menu.print_menu(stdscr, current_row_idx, menu_login)
