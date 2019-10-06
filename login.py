@@ -84,6 +84,3 @@ def start_login(stdscr):
         stdscr.addstr(y_mensagem + 1, x_mensagem + (len("Bem vindo")-len("Aperte qualquer coisa para continuar"))//2, "Aperte qualquer coisa para continuar")
         stdscr.refresh()
         stdscr.getch()
-
-
-curses.wrapper(start_login)

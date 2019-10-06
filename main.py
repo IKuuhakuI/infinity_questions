@@ -1,7 +1,8 @@
 import pyrebase
 import curses
-import time
+
 import menu
+import login
 
 def main(stdscr):
     # Menu com as opcoes de login
@@ -47,9 +48,15 @@ def main(stdscr):
                 stdscr.getch()
 
                 break
-            
+
+            elif current_row_idx == 0:
+                curses.curs_set(True)
+                login.start_login(stdscr)
+                curses.curs_set(False)
+
             # Mensagem quando user escolhe alguma opcao
-            stdscr.addstr(0, 0, "Voce escolheu: {}" .format(menu_login[current_row_idx]))
+            else:
+                stdscr.addstr(0, 0, "Voce escolheu: {}" .format(menu_login[current_row_idx]))
 
             stdscr.refresh()
             stdscr.getch()
