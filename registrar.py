@@ -26,32 +26,69 @@ def start_registrar(stdscr):
 
 	quantidade_users = db_quantidade_users.child("Quantidade_Users").get().val()
 
-	name_label = "Nome: "
-	pass_label = "Senha: "
-	confirm_pass_label = "Confirmar senha: "
+	
 
-	x_nome = largura_tela//2 - 15
-	y_nome = altura_tela//2
+	while True:
+		name_label = "Nome: "
+		pass_label = "Senha: "
+		confirm_pass_label = "Confirmar senha: "
 
-	x_senha = largura_tela//2 - 15
-	y_senha = altura_tela//2 + 1
+		x_nome = largura_tela//2 - 15
+		y_nome = altura_tela//2
 
-	x_confirm = largura_tela//2 - 15
-	y_confirm = altura_tela//2 + 2
+		x_senha = largura_tela//2 - 15
+		y_senha = altura_tela//2 + 1
 
-	stdscr.addstr(y_nome, x_nome, name_label)
-	stdscr.addstr(y_senha, x_senha, pass_label)
-	stdscr.addstr(y_confirm, x_confirm, confirm_pass_label)
+		x_confirm = largura_tela//2 - 15
+		y_confirm = altura_tela//2 + 2
 
-	curses.echo()
-	user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
+		stdscr.addstr(y_nome, x_nome, name_label)
+		stdscr.addstr(y_senha, x_senha, pass_label)
+		stdscr.addstr(y_confirm, x_confirm, confirm_pass_label)
 
-	curses.echo(False)
-	user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
+		curses.echo()
+		user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
 
-	user_confirm_password = stdscr.getstr(y_confirm, x_confirm + len(confirm_pass_label), 15)
+		curses.echo(False)
+		user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
+
+		user_confirm_password = stdscr.getstr(y_confirm, x_confirm + len(confirm_pass_label), 15)
+
+		if user_password == user_confirm_password and len(user_name) > 3 and len(user_password) > 3:
+			stdscr.clear()
+			stdscr.addstr(0,0,"Registrado")
+			stdscr.getch()
+			stdscr.clear()
+			break
+
+		while True:
+			stdscr.clear()
+			stdscr.addstr(0,0,"Usuario ou senha Invalidos")
+			stdscr.getch()
+			stdscr.clear()
+			break
+
+	new_user_id = quantidade_users + 1
+	db_new_user = firebase.database()
+	new_user = db_new_user.child("Users").child(new_user_id)
+
+	user_name = user_name.decode("utf-8")
+	user_password = user_password.decode("utf-8")
+
+	new_user = {
+		"Name": user_name,
+		"Pass": user_password
+	}
+
+	db_qtd_user = firebase.database()
+
+	qtd_user = {
+		"Quantidade_Users": new_user_id
+	}
+
+	db_new_user.update(new_user)
+	db_qtd_user.update(qtd_user)
 
 	stdscr.refresh()
-	stdscr.getch()
 
 curses.wrapper(start_registrar)
