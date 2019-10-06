@@ -5,7 +5,7 @@ import menu
 
 def main(stdscr):
     # Menu com as opcoes de login
-    menu_login = ('Login', 'Registrar', 'Sair')
+    menu_login = ('Login', 'Registrar', 'Scoreboard', 'Sair')
 
     # Esconde o cursor 
     curses.curs_set(0)

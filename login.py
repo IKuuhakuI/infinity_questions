@@ -1,6 +1,5 @@
 import pyrebase
 import curses
-import time
 
 def start_login(stdscr):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
