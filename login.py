@@ -1,5 +1,6 @@
 import pyrebase
 import curses
+import time
 
 def start_login(stdscr):
     config = {
@@ -35,6 +36,44 @@ def start_login(stdscr):
     curses.echo(False)
     user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
 
-    stdscr.getch()
+    db_quantidade_users = firebase.database()
+    quantidade_users = db_quantidade_users.child("Quantidade_Users").get().val()
+
+    logged_in = False
+
+    user_name = user_name.decode("utf-8")
+    user_password = user_password.decode("utf-8")
+
+    for user_id in range(1, quantidade_users + 1):
+        db_user_name = firebase.database()
+        db_user_pass = firebase.database()
+
+        current_user_name = db_user_name.child("Users").child(user_id).child("Name").get().val()
+        current_user_pass = db_user_pass.child("Users").child(user_id).child("Pass").get().val()
+
+        current_user_name = str(current_user_name)
+        current_user_pass = str(current_user_pass)
+
+        stdscr.clear()
+
+        if current_user_name == user_name and current_user_pass == user_password:
+            stdscr.clear()
+            stdscr.addstr(0,0,"Bem vindo")
+
+            stdscr.refresh()
+            stdscr.getch()
+
+            break
+
+        else:
+            stdscr.clear()
+            stdscr.addstr(0,0,user_name)
+            stdscr.addstr(1,0,user_password)
+            stdscr.addstr(2,0,current_user_name)
+            stdscr.addstr(3,0,current_user_pass)
+            stdscr.addstr(4,0, "nao logou")
+            stdscr.refresh()
+            stdscr.getch()
+
 
 curses.wrapper(start_login)
