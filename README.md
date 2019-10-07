@@ -1,5 +1,5 @@
 <H1> SHOW DO MILHÃO </H1>
-<H4> trabalho de computação 1 - UFRJ </H4>
+<H4> Trabalho de Computação 1 - UFRJ </H4>
 
 <H2> OBJETIVO DO TRABALHO </H2>
 <p>O objetivo do trabalho é criar um jogo de perguntas e respostas. Para isso, iremos utilizar o banco de dados do Google (Firebase) em conjunto com o nosso conhecimento de python.</p>
@@ -20,6 +20,9 @@
 <br>
 
 <p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. </p>
+
+<H2> REGRAS </H2>
+<p> Ao começar o jogo, teremos todas as perguntas do banco de dados sendo postas de forma aleatória. Um fator de dificuldade é o tempo. O usuário terá 20 segundos para responder cada pergunta. Caso ele acerte, ele avançará para a próxima. O objetivo é responder o máximo que ele conseguir. As perguntas são todas objetivas, restritas a 4 opções, sendo uma, e somente uma delas, correta. Caso ele erre, o jogo acaba.</p>
 
 <H2> FUNCIONALIDADES EXTRAS </H2>
 <p> Para deixar o jogo mais divertido, decidmos adicionar algumas funcionalidades. Após discutirmos sobre várias ideias, essas serão as que usaremos no jogo:<br>
