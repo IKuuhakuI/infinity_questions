@@ -21,7 +21,7 @@
 
 <p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. </p>
 
-<H2> FUNCIONALIDADES </H2>
+<H2> FUNCIONALIDADES EXTRAS </H2>
 <p> Para deixar o jogo mais divertido, decidmos adicionar algumas funcionalidades. Após discutirmos sobre várias ideias, essas serão as que usaremos no jogo:<br>
 
 <b> Enviar perguntas: </b> Para que o jogo fique mais divertido ainda, decidimos utilizar um sistema no qual o jogador pode sugerir novas perguntas, fazendo com que ele fique cada vez mais desafiador!
