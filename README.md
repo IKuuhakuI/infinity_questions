@@ -17,6 +17,7 @@
 <p><b> Pyrebase: </b>Essa biblioteca é responsável pelo banco de dados Firebase. Com ela poderemos utilizar funcionalidades de login, senha, poderemos salvar as pontuações no Scoreboard e conseguiremos implementar um sistema de sugestões de perguntas. Caso deseja saber mais sobre a biblioteca, clique <a href="https://github.com/thisbejim/Pyrebase">aqui</a> Para instalar-la em seu computador (Linux ou Windows), utilize o seguinte comando:</p>
 
 <blockquote> $ pip3 install pyrebase4 </blockquote>
+<br>
 
 <p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. </p>
 
