@@ -30,4 +30,4 @@
 
 <b> Enviar perguntas: </b> Para que o jogo fique mais divertido ainda, decidimos utilizar um sistema no qual o jogador pode sugerir novas perguntas, fazendo com que ele fique cada vez mais desafiador!
 
-<b> Sistema de Login e Scoreboard </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 10 melhores pontuações e seus respectivos usuários.</p>
+<b> Sistema de Login e Scoreboard: </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 5 melhores pontuações e seus respectivos usuários.</p>
