@@ -20,7 +20,7 @@
 <blockquote> $ pip3 install pyrebase4 </blockquote>
 <br>
 
-<p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. </p>
+<p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. É necessário uma conexão com a internet para poder jogar.</p>
 
 <H2> REGRAS </H2>
 <p> Ao começar o jogo, teremos todas as perguntas do banco de dados sendo postas de forma aleatória. Um fator de dificuldade é o tempo. O usuário terá 20 segundos para responder cada pergunta. Caso ele acerte, ele avançará para a próxima. O objetivo é responder o máximo que ele conseguir. As perguntas são todas objetivas, restritas a 4 opções, sendo uma, e somente uma delas, correta. Caso ele erre, o jogo acaba.</p>
@@ -31,3 +31,6 @@
 <b> Enviar perguntas: </b> Para que o jogo fique mais divertido ainda, decidimos utilizar um sistema no qual o jogador pode sugerir novas perguntas, fazendo com que ele fique cada vez mais desafiador!
 
 <b> Sistema de Login e Scoreboard: </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 5 melhores pontuações e seus respectivos usuários.</p>
+
+<H2> MATERIAIS ADICIONAIS </H2>
+<p><b> Wireframe: </b>http://bit.ly/wireframe_show_do_milhao</p>
