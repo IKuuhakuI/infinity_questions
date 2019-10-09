@@ -9,10 +9,10 @@
 <p> Para poder testar o nosso programa, você deve ter instalado as seguintes
 	bibliotecas em seu computador:
 
-<b>Curses:</b> Caso você esteja utilizando um sistema Linux, provavelmente você já
+<b>Curses:</b> Essa biblioteca permite criarmos os menus. Para mais informações sobre ela, clique <a href = "https://github.com/zephyrproject-rtos/windows-curses">aqui</a>. Caso você esteja utilizando um sistema Linux, provavelmente você já
  possui essa biblioteca instalada. Caso esteja usando o windows utilize o seguinte comando:</p>
 
-<blockquote> $ pip3 install windows-curser </blockquote>
+<blockquote> $ pip install windows-curses </blockquote>
 <br>
 
 <p><b> Pyrebase: </b>Essa biblioteca é responsável pelo banco de dados Firebase. Com ela poderemos utilizar funcionalidades de login, senha, poderemos salvar as pontuações no Scoreboard e conseguiremos implementar um sistema de sugestões de perguntas. Caso deseja saber mais sobre a biblioteca, clique <a href="https://github.com/thisbejim/Pyrebase">aqui</a> Para instalar-la em seu computador (Linux ou Windows), utilize o seguinte comando:</p>
