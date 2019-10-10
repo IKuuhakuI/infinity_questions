@@ -50,11 +50,13 @@ def main(stdscr):
 
                 break
 
+            # Caso selecione a opcao de login  
             elif current_row_idx == 0:
                 curses.curs_set(True)
                 login.start_login(stdscr)
                 curses.curs_set(False)
 
+            # Caso selecione a opcao de registrar
             elif current_row_idx == 1:
                 curses.curs_set(True)
                 registrar.start_registrar(stdscr)
@@ -63,7 +65,8 @@ def main(stdscr):
             # Mensagem quando user escolhe alguma opcao
             else:
                 stdscr.addstr(0, 0, "Voce escolheu: {}" .format(menu_login[current_row_idx]))
-
+                stdscr.getch()
+                
             stdscr.refresh()
 
         # Atualiza o menu
