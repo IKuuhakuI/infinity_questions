@@ -1,4 +1,4 @@
-<H1> SHOW DO MILHÃO </H1>
+<H1> Infinity Questions </H1>
 <H4> Trabalho de Computação 1 - UFRJ </H4>
 <H4> Grupo: Amanda Pereira da Silva, Luiz Carlos Aguiar Carrion, Maria Eduarda de Souza Mafra, Yuri Pereira Dantas </H4>
 
