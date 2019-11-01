@@ -33,4 +33,4 @@
 <b> Sistema de Login e Scoreboard: </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 5 melhores pontuações e seus respectivos usuários.</p>
 
 <H2> MATERIAIS ADICIONAIS </H2>
-<p><b> Wireframe: </b>http://bit.ly/wireframe_show_do_milhao</p>
+<p><b> Wireframe: </b>http://bit.ly/wireframe_infinity_questions</p>
