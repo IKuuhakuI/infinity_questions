@@ -1,5 +1,6 @@
 import pyrebase
 import curses
+import textPrint
 
 def start_registrar(stdscr):
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -29,6 +30,10 @@ def start_registrar(stdscr):
 	exitRegister = False
 
 	while True:
+		textPrint.print_title(stdscr)
+
+		curses.curs_set(True)
+
 		name_label = "Nome: "
 		pass_label = "Senha: "
 		confirm_pass_label = "Confirmar senha: "
@@ -70,19 +75,35 @@ def start_registrar(stdscr):
 			exitRegister = True
 			break
 
-		if user_password == user_confirm_password and len(user_name) > 3 and len(user_name) <= 20 and len(user_password) > 3 and len(user_password) <= 20:
+		isUnique = True
+
+		db_all_users = firebase.database()
+
+		for user in range(quantidade_users):
+			this_user = db_all_users.child("Users").child(user + 1).child("Name").get().val()
+
+			if user_name == this_user:
+				isUnique = False
+				stdscr.clear()
+				textPrint.print_center(stdscr, "Nome de usuario ja existe")
+				stdscr.getch()
+				stdscr.clear()
+				break
+
+
+		if isUnique == True and user_password == user_confirm_password and len(user_name) > 3 and len(user_name) <= 20 and len(user_password) > 3 and len(user_password) <= 20:
 			stdscr.clear()
 			stdscr.addstr(0,0,"Registrado")
 			stdscr.getch()
 			stdscr.clear()
 			break
 
-		while True:
-			stdscr.clear()
-			stdscr.addstr(0,0,"Usuario ou senha Invalidos")
-			stdscr.getch()
-			stdscr.clear()
-			break
+		#while True:
+		#	stdscr.clear()
+		#	stdscr.addstr(0,0,"Usuario ou senha Invalidos")
+		#	stdscr.getch()
+		#	stdscr.clear()
+		#	break
 
 	if exitRegister == False:
 		new_user_id = quantidade_users + 1
