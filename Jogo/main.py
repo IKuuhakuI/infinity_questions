@@ -4,6 +4,8 @@ import curses
 import menu
 import login
 import registrar
+import scoreboard
+import textPrint
 
 def main(stdscr):
     # Menu com as opcoes de login
@@ -21,6 +23,8 @@ def main(stdscr):
 
     # Imprime o menu de login na tela
     menu.print_menu(stdscr, current_row_idx, menu_login)
+
+    textPrint.print_title(stdscr)
 
     while True:
         # Recebe a entrada do teclado
@@ -62,6 +66,9 @@ def main(stdscr):
                 registrar.start_registrar(stdscr)
                 curses.curs_set(False)
 
+            elif current_row_idx == 2:
+                scoreboard.show_scoreboard(stdscr)
+
             # Mensagem quando user escolhe alguma opcao
             else:
                 stdscr.addstr(0, 0, "Voce escolheu: {}" .format(menu_login[current_row_idx]))
@@ -69,8 +76,10 @@ def main(stdscr):
                 
             stdscr.refresh()
 
+
         # Atualiza o menu
         menu.print_menu(stdscr, current_row_idx, menu_login)
         stdscr.refresh()
+        textPrint.print_title(stdscr)
         
 curses.wrapper(main)

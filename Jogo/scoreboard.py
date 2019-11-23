@@ -2,6 +2,7 @@ import pyrebase
 import curses
 
 import menu
+import textPrint
 
 def get_top_5_high_score():
     config = {
@@ -58,24 +59,17 @@ def show_scoreboard(stdscr):
     menu_scoreboard = ["Voltar"]
 
     # Coloca a cor atual como sendo o primeiro par
-    stdscr.attron(curses.color_pair(2))
+    stdscr.attron(curses.color_pair(1))
 
     # Altura e Largura da Tela
     altura_tela, largura_tela = stdscr.getmaxyx()
 
-    title = "Infinity Questions"
-
-    # Coordenadas do texto
-    x_title = largura_tela//2 - len(title)//2
-    y_title = altura_tela//8
-    
     menu.back_btn(stdscr, 0, menu_scoreboard)
-    stdscr.addstr(y_title, x_title, title)
+
+    textPrint.print_title(stdscr)
 
     print_scoreboard(stdscr)
 
     stdscr.getch()
 
     stdscr.refresh()
-
-curses.wrapper(show_scoreboard)
