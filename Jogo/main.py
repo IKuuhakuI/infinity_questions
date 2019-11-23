@@ -46,7 +46,9 @@ def main(stdscr):
             # Caso selecione a opcao de sair
             if current_row_idx == len(menu_login) - 1:
                 # Mensagem ao sair
-                stdscr.addstr(0, 0, "Obrigado por jogar. Aperte qualquer coisa para sair")
+                message = "Obrigado por jogar. Aperte qualquer coisa para sair"
+                textPrint.print_center(stdscr, message)
+                textPrint.print_title(stdscr)
                 stdscr.refresh()
 
                 # Espera o user digitar algo pra sair
