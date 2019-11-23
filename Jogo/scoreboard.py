@@ -12,7 +12,7 @@ def show_scoreboard(stdscr):
     menu_scoreboard = ["Voltar"]
 
     # Coloca a cor atual como sendo o primeiro par
-    stdscr.attron(curses.color_pair(1))
+    stdscr.attron(curses.color_pair(2))
 
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
@@ -27,9 +27,17 @@ def show_scoreboard(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
-    
+    # Altura e Largura da Tela
+    altura_tela, largura_tela = stdscr.getmaxyx()
 
-    menu.print_menu(stdscr, 0, menu_scoreboard)
+    title = "Infinity Questions"
+
+    # Coordenadas do texto
+    x = largura_tela//2 - len(title)//2
+    y = altura_tela//8
+    
+    menu.back_btn(stdscr, 0, menu_scoreboard)
+    stdscr.addstr(y, x, title)
 
     stdscr.getch()
 
