@@ -26,7 +26,7 @@ def start_registrar(stdscr):
 
 	quantidade_users = db_quantidade_users.child("Quantidade_Users").get().val()
 
-	
+	exitRegister = False
 
 	while True:
 		name_label = "Nome: "
@@ -49,6 +49,12 @@ def start_registrar(stdscr):
 		curses.echo()
 		user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
 
+		check_user_name = user_name.decode("utf-8")
+
+		if check_user_name == "/exit":
+			exitRegister = True
+			break
+
 		curses.echo(False)
 		user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
 
@@ -68,25 +74,27 @@ def start_registrar(stdscr):
 			stdscr.clear()
 			break
 
-	new_user_id = quantidade_users + 1
-	db_new_user = firebase.database()
-	new_user = db_new_user.child("Users").child(new_user_id)
+	if exitRegister == False:
+		new_user_id = quantidade_users + 1
+		db_new_user = firebase.database()
+		new_user = db_new_user.child("Users").child(new_user_id)
 
-	user_name = user_name.decode("utf-8")
-	user_password = user_password.decode("utf-8")
+		user_name = user_name.decode("utf-8")
+		user_password = user_password.decode("utf-8")
 
-	new_user = {
-		"Name": user_name,
-		"Pass": user_password
-	}
+		new_user = {
+			"Name": user_name,
+			"Pass": user_password,
+			"Highscore": 0
+		}
 
-	db_qtd_user = firebase.database()
+		db_qtd_user = firebase.database()
 
-	qtd_user = {
-		"Quantidade_Users": new_user_id
-	}
+		qtd_user = {
+			"Quantidade_Users": new_user_id
+		}
 
-	db_new_user.update(new_user)
-	db_qtd_user.update(qtd_user)
+		db_new_user.update(new_user)
+		db_qtd_user.update(qtd_user)
 
-	stdscr.refresh()
+		stdscr.refresh()
