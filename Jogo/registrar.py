@@ -49,18 +49,28 @@ def start_registrar(stdscr):
 		curses.echo()
 		user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
 
-		check_user_name = user_name.decode("utf-8")
+		user_name = user_name.decode("utf-8")
 
-		if check_user_name == "/exit":
+		if user_name == "/exit":
 			exitRegister = True
 			break
 
 		curses.echo(False)
 		user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
+		user_password = user_password.decode("utf-8")
+
+		if user_password == "/exit":
+			exitRegister = True
+			break
 
 		user_confirm_password = stdscr.getstr(y_confirm, x_confirm + len(confirm_pass_label), 15)
+		user_confirm_password = user_confirm_password.decode("utf-8")
 
-		if user_password == user_confirm_password and len(user_name) > 3 and len(user_password) > 3:
+		if user_confirm_password == "/exit":
+			exitRegister = True
+			break
+
+		if user_password == user_confirm_password and len(user_name) > 3 and len(user_name) <= 20 and len(user_password) > 3 and len(user_password) <= 20:
 			stdscr.clear()
 			stdscr.addstr(0,0,"Registrado")
 			stdscr.getch()
@@ -78,9 +88,6 @@ def start_registrar(stdscr):
 		new_user_id = quantidade_users + 1
 		db_new_user = firebase.database()
 		new_user = db_new_user.child("Users").child(new_user_id)
-
-		user_name = user_name.decode("utf-8")
-		user_password = user_password.decode("utf-8")
 
 		new_user = {
 			"Name": user_name,
