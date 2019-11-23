@@ -29,9 +29,12 @@ def start_registrar(stdscr):
 
 	exitRegister = False
 
-	while True:
-		textPrint.print_title(stdscr)
+	exitMessage = "Para sair, digite /exit no nome ou senha"
 
+	while True:
+		textPrint.print_bottom(stdscr, exitMessage)
+		textPrint.print_title(stdscr)
+		
 		curses.curs_set(True)
 
 		name_label = "Nome: "
