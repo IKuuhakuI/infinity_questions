@@ -30,7 +30,7 @@ def start_login(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
-    tentativas_restantes = 1
+    tentativas_restantes = 2
 
     while True:
         if tentativas_restantes == 0:
@@ -128,11 +128,16 @@ def start_login(stdscr):
         else:
             tentativas_restantes -= 1
 
-            text_error = ["ERRO AO EFETUAR LOGIN", "Aperte qualquer coisa para continuar"]
+            if(tentativas_restantes == 0):
+                text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", "Aperte qualquer coisa para continuar"]
+                qtd_lines = 3
+            else:
+                text_error = ["ERRO AO EFETUAR LOGIN", "Aperte qualquer coisa para continuar"]
+                qtd_lines = 2
 
             text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
 
-            textPrint.print_multi_lines(stdscr, text_error, 2)
+            textPrint.print_multi_lines(stdscr, text_error, qtd_lines)
             textPrint.print_bottom(stdscr, text_tentativas)
             
             stdscr.refresh()
