@@ -103,12 +103,13 @@ def start_registrar(stdscr):
 			stdscr.clear()
 			break
 
-		#while True:
-		#	stdscr.clear()
-		#	stdscr.addstr(0,0,"Usuario ou senha Invalidos")
-		#	stdscr.getch()
-		#	stdscr.clear()
-		#	break
+		else:
+			stdscr.clear()
+			error_message = ["ERRO AO CRIAR USUARIO", "Aperte qualquer tecla"]
+
+			textPrint.print_multi_lines(stdscr, error_message, 2)
+			stdscr.getch()
+			stdscr.clear()
 
 	if exitRegister == False:
 		new_user_id = quantidade_users + 1
