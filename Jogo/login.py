@@ -107,8 +107,9 @@ def start_login(stdscr):
     
         # Limpa a tela
         stdscr.clear()
-    
-    
+        
+        textPrint.print_title(stdscr)
+        
         curses.curs_set(0)
 
         # Caso esteja logado
