@@ -31,7 +31,9 @@ def start_login(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
-    tentativas_restantes = 2
+    tentativas_restantes = 8
+
+    exitMessage = "Para sair, digite /exit no nome ou senha"
 
     while True:
         if tentativas_restantes == 0:
@@ -39,6 +41,7 @@ def start_login(stdscr):
             stdscr.clear()
 
         textPrint.print_title(stdscr)
+        textPrint.print_bottom(stdscr, exitMessage)
 
         curses.curs_set(True)
 
@@ -88,9 +91,9 @@ def start_login(stdscr):
     
         # Converte o que foi lido de bytes para string
         
-        
+        stdscr.clear()
 
-        textPrint.print_bottom(stdscr, "Aguarde...")
+        textPrint.print_center(stdscr, "Aguarde...")
         stdscr.refresh()
 
         # Loop que verifica se o user existe e se a senha e correta
