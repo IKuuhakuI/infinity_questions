@@ -88,7 +88,7 @@ def show_scoreboard(stdscr):
     stdscr.refresh()
 
     while True:    
-        key = stdscr.getch()
+        key = stdscr.getch()   
         if actions.keyboard(key) == 'enter':
             break
 
