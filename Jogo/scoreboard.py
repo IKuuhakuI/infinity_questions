@@ -4,6 +4,7 @@ import time
 
 import menu
 import textPrint
+import actions
 
 def get_top_5_high_score():
     config = {
@@ -88,7 +89,7 @@ def show_scoreboard(stdscr):
 
     while True:    
         key = stdscr.getch()
-        if key == curses.KEY_ENTER or key in [10,13]:
+        if actions.keyboard(key) == 'enter':
             break
 
     
