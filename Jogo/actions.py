@@ -1,3 +1,5 @@
+import curses
+
 def verify_exit(entrada):
     if entrada == "/exit":
         return True
@@ -13,7 +15,7 @@ def verify_next(entrada):
 		return True
 	return False
 
-def keyboard_actions(entrada):
+def keyboard(entrada):
     if entrada == curses.KEY_UP:
         return 'up'
 
