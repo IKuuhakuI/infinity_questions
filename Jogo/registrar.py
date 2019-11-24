@@ -87,15 +87,18 @@ def start_registrar(stdscr):
 
 		db_all_users = firebase.database()
 
+		stdscr.clear()
+
+		textPrint.print_title(stdscr)
+		textPrint.print_center(stdscr, "Aguarde...")
+
+		stdscr.refresh()
+
 		for user in range(quantidade_users):
 			this_user = db_all_users.child("Users").child(user + 1).child("Name").get().val()
 
 			if user_name == this_user:
 				isUnique = False
-				stdscr.clear()
-				textPrint.print_center(stdscr, "Nome de usuario ja existe")
-				stdscr.getch()
-				stdscr.clear()
 				break
 
 
