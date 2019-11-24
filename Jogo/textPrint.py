@@ -87,3 +87,11 @@ def print_bottom(stdscr, text):
     y_text = altura_tela - altura_tela//8
  
     stdscr.addstr(y_text, x_text, text)
+
+def print_user_data(stdscr, user_data):
+    user_name = "Usuario: " + user_data[0]
+    user_high_score = "Highscore: " + str(user_data[1])
+
+    text = user_name + " | " + user_high_score
+
+    print_bottom(stdscr, text)
