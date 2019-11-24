@@ -34,9 +34,9 @@ def start_login(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
-    tentativas_restantes = 8
-
     exitMessage = "Para sair, digite /exit no nome ou senha"
+
+    stop = False
 
     while True:
         if tentativas_restantes == 0:
@@ -143,19 +143,47 @@ def start_login(stdscr):
         else:
             tentativas_restantes -= 1
 
-            menu.horizontal_menu(stdscr, 0, yes_no_menu)
+            current_row_idx = 0
 
-            text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
+            while True:
+                textPrint.print_title(stdscr)
 
-            if(tentativas_restantes == 0):
-                text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", "Aperte qualquer coisa para continuar"]
-            else:
-                text_error = ["ERRO AO EFETUAR LOGIN", text_tentativas, "Aperte qualquer coisa para continuar"]
+                menu.horizontal_menu(stdscr, current_row_idx, yes_no_menu)
 
-            textPrint.print_multi_lines(stdscr, text_error, 3)
-            #textPrint.print_bottom(stdscr, text_tentativas)
-            
-            stdscr.refresh()
-            stdscr.getch()
-            stdscr.clear()
+                text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
+
+                tentar_novamente = "Deseja tentar novamente?"
+
+                if(tentativas_restantes == 0):
+                    text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", tentar_novamente]
+                else:
+                    text_error = ["ERRO AO EFETUAR LOGIN", text_tentativas, tentar_novamente]
+
+                textPrint.print_multi_lines(stdscr, text_error, 3)
+                        
+                stdscr.refresh()
+
+                key = stdscr.getch()
+
+                if key == curses.KEY_LEFT and current_row_idx > 0:
+                    current_row_idx -= 1
+
+                elif key == curses.KEY_RIGHT and current_row_idx < 1:
+                    current_row_idx += 1
+
+                elif key == curses.KEY_ENTER or key in [10,13]:
+                    if current_row_idx == 0:
+                        stop = False
+                        break
+                    else:
+                        stop = True
+                        break
+
+                stdscr.clear()
+
+        stdscr.clear()
+
+        if stop == True:
+            break
+                
 
