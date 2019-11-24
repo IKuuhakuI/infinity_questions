@@ -5,6 +5,7 @@ import getUser
 import menu
 import pyrebase
 import textPrint
+import scoreboard
 
 def show_game_menu(stdscr, current_user):
     # Menu com as opcoes para o jogo 
@@ -71,8 +72,7 @@ def show_game_menu(stdscr, current_user):
                 stdscr.getch()
 
             elif current_row_idx == 2:
-                textPrint.print_center(stdscr, "Scoreboard")
-                stdscr.getch()
+                scoreboard.show_scoreboard(stdscr)
 
             stdscr.refresh()
 

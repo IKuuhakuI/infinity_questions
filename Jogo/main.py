@@ -75,6 +75,7 @@ def main(stdscr):
                 registrar.start_registrar(stdscr)
                 curses.curs_set(False)
 
+            # Caso selecione a opcao de scoreboard  
             elif current_row_idx == 2:
                 scoreboard.show_scoreboard(stdscr)
 
