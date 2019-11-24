@@ -4,7 +4,7 @@ import actions
 import menu
 import textPrint
 
-def show_game_menu(stdscr):
+def show_game_menu(stdscr, current_user):
     # Menu com as opcoes para o jogo 
     menu_jogo = ('Jogar', 'Perguntas', 'Scoreboard', 'Logout')
 
@@ -21,6 +21,10 @@ def show_game_menu(stdscr):
     # Imprime o menu do Jogo
     menu.print_menu(stdscr, current_row_idx, menu_jogo)
 
+    # Imprime o usuario atual
+    textPrint.print_bottom(stdscr, "Usuario: " + str(current_user))
+
+
     # Imprime o titulo do jogo
     textPrint.print_title(stdscr)
 
@@ -29,13 +33,46 @@ def show_game_menu(stdscr):
 
         stdscr.clear()
 
-        if actions.keyboard(key) == 'up':
+        if actions.keyboard(key) == 'up' and current_row_idx > 0:
             textPrint.print_center(stdscr, 'up')
+            current_row_idx -= 1
 
-        elif actions.keyboard(key) == 'down':
+        elif actions.keyboard(key) == 'down' and current_row_idx < len(menu_jogo) - 1:
             textPrint.print_center(stdscr, 'down')
+            current_row_idx += 1
 
         elif actions.keyboard(key) == 'enter':
+            stdscr.clear()
             textPrint.print_center(stdscr, 'enter')
 
-curses.wrapper(show_game_menu)
+            if current_row_idx == len(menu_jogo) - 1:
+                break
+
+            elif current_row_idx == 0:
+                textPrint.print_center(stdscr, "Jogar")
+                stdscr.getch()
+
+            elif current_row_idx == 1:
+                textPrint.print_center(stdscr, "Perguntas")
+                stdscr.getch()
+
+            elif current_row_idx == 2:
+                textPrint.print_center(stdscr, "Scoreboard")
+                stdscr.getch()
+
+            stdscr.refresh()
+
+        # Imprime o titulo do jogo
+        menu.print_menu(stdscr, current_row_idx, menu_jogo)
+
+        # Imprime o usuario atual
+        textPrint.print_bottom(stdscr, "Usuario: " + str(current_user))
+        
+        stdscr.refresh()
+
+        textPrint.print_title(stdscr)
+
+def teste(stdscr):
+    show_game_menu(stdscr, 1)
+
+curses.wrapper(teste)
