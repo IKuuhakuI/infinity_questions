@@ -20,6 +20,10 @@ def show_game_menu(stdscr, current_user):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
+    # Mensagem de carregamento
+    textPrint.print_center(stdscr, "Carregando...")
+    stdscr.refresh()
+
     # Pega os dados do usuario que esta logado
     current_user_data = getUser.get_user_data(current_user)
     current_user_name = current_user_data["Name"] 
@@ -83,7 +87,7 @@ def show_game_menu(stdscr, current_user):
         textPrint.print_title(stdscr)
 
 def teste(stdscr):
-    user_id = 2
+    user_id = 12
     show_game_menu(stdscr, user_id)
 
 curses.wrapper(teste)
