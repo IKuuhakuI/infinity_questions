@@ -1,5 +1,6 @@
 import curses
 
+# Imprime o titulo do jogo no topo da tela
 def print_title(stdscr):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -18,6 +19,7 @@ def print_title(stdscr):
  
     stdscr.addstr(y_title, x_title, title)
 
+# Imprime uma linha no centro da tela
 def print_center(stdscr, text):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -34,6 +36,7 @@ def print_center(stdscr, text):
  
     stdscr.addstr(y_text, x_text, text)
 
+# Imprime varias linhas no centro da tela
 def print_multi_lines(stdscr, text_list, lines):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -51,6 +54,7 @@ def print_multi_lines(stdscr, text_list, lines):
  
         stdscr.addstr(y_text, x_text, text_list[linha_atual])
 
+# Imprime uma linha no final da tela
 def print_bottom(stdscr, text):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)

@@ -115,7 +115,7 @@ def start_login(stdscr):
         if logged_in == True:
             tentativas_restantes = 8
 
-            text_sucesso = ["Bem vindo", "Aperte qualquer coisa para continuar"]
+            text_sucesso = ["Bem vindo " + user_name, "Aperte qualquer coisa para continuar"]
 
             textPrint.print_multi_lines(stdscr, text_sucesso, 2)
             
