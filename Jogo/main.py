@@ -6,6 +6,7 @@ import login
 import registrar
 import scoreboard
 import textPrint
+import titleScreen
 
 def main(stdscr):
     # Menu com as opcoes de login
@@ -13,6 +14,11 @@ def main(stdscr):
 
     # Esconde o cursor 
     curses.curs_set(0)
+
+
+    # tela inicial do jogo
+
+    titleScreen.show_title_screen(stdscr)
 
     # Opcao atual do menu
     current_row_idx = 0
