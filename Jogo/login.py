@@ -62,13 +62,21 @@ def start_login(stdscr):
 
         # Le o nome do teclado
         user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
-    
+        user_name = user_name.decode("utf-8")
+        
+        if user_name == "/exit":
+            break
+        
         # Esconde o que o usuario esta escrevendo
         curses.echo(False)
     
         # Le a senha do teclado
         user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
-    
+        user_password = user_password.decode("utf-8")
+
+        if user_password == "/exit":
+            break
+
         # Conexao com o banco de dados
         db_quantidade_users = firebase.database()
         # Pega o valor da quantidade de usuarios
@@ -78,8 +86,8 @@ def start_login(stdscr):
         logged_in = False
     
         # Converte o que foi lido de bytes para string
-        user_name = user_name.decode("utf-8")
-        user_password = user_password.decode("utf-8")
+        
+        
 
         textPrint.print_bottom(stdscr, "Aguarde...")
         stdscr.refresh()
