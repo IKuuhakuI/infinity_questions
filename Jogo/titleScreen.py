@@ -9,8 +9,5 @@ def show_title_screen(stdscr):
 	
 	while True:
 		key = stdscr.getch()
-		if key == curses.KEY_ENTER:
+		if key == curses.KEY_ENTER or key in [10,13]:
 			break
-
-
-curses.wrapper(show_title_screen)
