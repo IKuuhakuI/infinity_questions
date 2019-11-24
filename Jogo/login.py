@@ -108,18 +108,17 @@ def start_login(stdscr):
         # Limpa a tela
         stdscr.clear()
     
-        # Coordenadas da mensagem
-        x_mensagem = largura_tela//2 - len("Bem vindo") // 2
-        y_mensagem = altura_tela//2
-
-        curses.curs_set(0)
     
+        curses.curs_set(0)
+
         # Caso esteja logado
         if logged_in == True:
             tentativas_restantes = 8
 
-            stdscr.addstr(y_mensagem,x_mensagem,"Bem vindo")
-            stdscr.addstr(y_mensagem + 1, x_mensagem + (len("Bem vindo") - len("Aperte qualquer coisa para continuar"))//2, "Aperte qualquer coisa para continuar")
+            text_sucesso = ["Bem vindo", "Aperte qualquer coisa para continuar"]
+
+            textPrint.print_multi_lines(stdscr, text_sucesso, 2)
+            
             stdscr.refresh()
             stdscr.getch()
             break
