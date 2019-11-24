@@ -20,19 +20,23 @@ def show_game_menu(stdscr, current_user):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
-    # Imprime o menu do Jogo
-    menu.print_menu(stdscr, current_row_idx, menu_jogo)
-
-    # Imprime o titulo do jogo
-    textPrint.print_title(stdscr)
-
     # Pega os dados do usuario que esta logado
     current_user_data = getUser.get_user_data(current_user)
     current_user_name = current_user_data["Name"] 
     current_user_high_score = current_user_data["Highscore"]
 
+    data_list = [current_user_name, current_user_high_score]
+
+    # Imprime o menu do Jogo
+    menu.print_menu(stdscr, current_row_idx, menu_jogo)
+
     # Imprime o usuario atual
-    textPrint.print_bottom(stdscr, "Usuario: " + current_user_name + " | " + str(current_user_high_score))
+    textPrint.print_user_data(stdscr, data_list)
+    
+    # Imprime o titulo do jogo
+    textPrint.print_title(stdscr)
+
+    stdscr.refresh()
 
     while True:
         key = stdscr.getch()
@@ -72,14 +76,14 @@ def show_game_menu(stdscr, current_user):
         menu.print_menu(stdscr, current_row_idx, menu_jogo)
 
         # Imprime o usuario atual
-        textPrint.print_bottom(stdscr, "Usuario: " + current_user_name + " | " + str(current_user_high_score))
+        textPrint.print_user_data(stdscr, data_list)        
         
         stdscr.refresh()
 
         textPrint.print_title(stdscr)
 
 def teste(stdscr):
-    user_id = 6
+    user_id = 2
     show_game_menu(stdscr, user_id)
 
 curses.wrapper(teste)
