@@ -7,6 +7,7 @@ import registrar
 import scoreboard
 import textPrint
 import titleScreen
+import actions
 
 def main(stdscr):
     # Menu com as opcoes de login
@@ -38,15 +39,15 @@ def main(stdscr):
         stdscr.clear()
 
         # Mover para cima no menu
-        if key == curses.KEY_UP and current_row_idx > 0:
+        if actions.keyboard(key) == 'up' and current_row_idx > 0:
             current_row_idx -= 1
         
         # Mover para baixo no menu
-        elif key == curses.KEY_DOWN and current_row_idx < len(menu_login) - 1:
+        elif actions.keyboard(key) == 'down' and current_row_idx < len(menu_login) - 1:
             current_row_idx += 1
 
         # Seleciona uma opcao do menu
-        elif key == curses.KEY_ENTER or key in [10,13]:
+        elif actions.keyboard(key) == 'enter':
             stdscr.clear()
             
             # Caso selecione a opcao de sair
