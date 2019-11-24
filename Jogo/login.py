@@ -136,8 +136,11 @@ def start_login(stdscr):
             textPrint.print_multi_lines(stdscr, text_sucesso, 2)
             
             stdscr.refresh()
+
             stdscr.getch()
+            stdscr.clear()
             game.show_game_menu(stdscr, user_id)
+            
             break
 
         # Caso falhe em logar
