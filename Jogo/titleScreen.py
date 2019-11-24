@@ -1,5 +1,6 @@
 import curses
 import textPrint
+import actions
 
 #Tela inicial
 def show_title_screen(stdscr):
@@ -9,5 +10,7 @@ def show_title_screen(stdscr):
 	
 	while True:
 		key = stdscr.getch()
-		if key == curses.KEY_ENTER or key in [10,13]:
+		if actions.keyboard(key) == 'enter':
 			break
+
+
