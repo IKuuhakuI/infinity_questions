@@ -98,16 +98,24 @@ def start_registrar(stdscr):
 
 		if isUnique == True and user_password == user_confirm_password and len(user_name) > 3 and len(user_name) <= 20 and len(user_password) > 3 and len(user_password) <= 20:
 			stdscr.clear()
-			stdscr.addstr(0,0,"Registrado")
+
+			textPrint.print_title(stdscr)
+			sucess_message = ["Usuario " + str(user_name) + " registrado!", "Pressione qualquer tecla para continuar"]
+			textPrint.print_multi_lines(stdscr,sucess_message, 2)
+			
+			stdscr.refresh()
 			stdscr.getch()
 			stdscr.clear()
 			break
 
 		else:
 			stdscr.clear()
-			error_message = ["ERRO AO CRIAR USUARIO", "Aperte qualquer tecla"]
+			error_message = ["ERRO AO CRIAR USUARIO", "Pressione qualquer tecla para continuar"]
 
+			textPrint.print_title(stdscr)
 			textPrint.print_multi_lines(stdscr, error_message, 2)
+			
+			stdscr.refresh()
 			stdscr.getch()
 			stdscr.clear()
 
