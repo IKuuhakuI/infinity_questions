@@ -118,7 +118,8 @@ def start_registrar(stdscr):
 		new_user = {
 			"Name": user_name,
 			"Pass": user_password,
-			"Highscore": 0
+			"Highscore": 0,
+			"Questions": {"Quantidade_enviadas":0}
 		}
 
 		db_qtd_user = firebase.database()
