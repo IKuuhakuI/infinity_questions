@@ -4,8 +4,11 @@ import curses
 import textPrint
 import actions
 import timer
+import menu
 
 def start_login(stdscr):
+    yes_no_menu = ('Sim', 'Nao')
+
     # Define as cores que serao utilizadas
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
@@ -140,17 +143,17 @@ def start_login(stdscr):
         else:
             tentativas_restantes -= 1
 
-            if(tentativas_restantes == 0):
-                text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", "Aperte qualquer coisa para continuar"]
-                qtd_lines = 3
-            else:
-                text_error = ["ERRO AO EFETUAR LOGIN", "Aperte qualquer coisa para continuar"]
-                qtd_lines = 2
+            menu.horizontal_menu(stdscr, 0, yes_no_menu)
 
             text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
 
-            textPrint.print_multi_lines(stdscr, text_error, qtd_lines)
-            textPrint.print_bottom(stdscr, text_tentativas)
+            if(tentativas_restantes == 0):
+                text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", "Aperte qualquer coisa para continuar"]
+            else:
+                text_error = ["ERRO AO EFETUAR LOGIN", text_tentativas, "Aperte qualquer coisa para continuar"]
+
+            textPrint.print_multi_lines(stdscr, text_error, 3)
+            #textPrint.print_bottom(stdscr, text_tentativas)
             
             stdscr.refresh()
             stdscr.getch()
