@@ -1,6 +1,7 @@
 import pyrebase
 import curses
 import textPrint
+import actions
 
 import timer
 
@@ -64,7 +65,7 @@ def start_login(stdscr):
         user_name = stdscr.getstr(y_nome,x_nome + len(name_label),15)
         user_name = user_name.decode("utf-8")
         
-        if user_name == "/exit":
+        if actions.verify_exit(user_name) == True:
             break
         
         # Esconde o que o usuario esta escrevendo
@@ -74,7 +75,7 @@ def start_login(stdscr):
         user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
         user_password = user_password.decode("utf-8")
 
-        if user_password == "/exit":
+        if actions.verify_exit(user_password) == True:
             break
 
         # Conexao com o banco de dados
