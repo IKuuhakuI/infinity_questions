@@ -5,6 +5,7 @@ import textPrint
 import actions
 import timer
 import menu
+import game
 
 def start_login(stdscr):
     yes_no_menu = ('Sim', 'Nao')
@@ -136,6 +137,7 @@ def start_login(stdscr):
             
             stdscr.refresh()
             stdscr.getch()
+            game.show_game_menu(stdscr, user_id)
             break
 
         # Caso falhe em logar
