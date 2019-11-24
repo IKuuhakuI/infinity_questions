@@ -131,13 +131,13 @@ def start_registrar(stdscr):
 
 				key = stdscr.getch()
 
-				if key == curses.KEY_LEFT and current_row_idx > 0:
+				if actions.keyboard(key) == 'left' and current_row_idx > 0:
 				    current_row_idx -= 1
 
-				elif key == curses.KEY_RIGHT and current_row_idx < 1:
+				elif actions.keyboard(key) == 'right' and current_row_idx < 1:
 				    current_row_idx += 1
 
-				elif key == curses.KEY_ENTER or key in [10,13]:
+				elif actions.keyboard(key) == 'enter':
 				    if current_row_idx == 0:
 				        exitRegister = False
 				        break
