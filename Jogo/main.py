@@ -6,7 +6,7 @@ import login
 import registrar
 import scoreboard
 import textPrint
-import titleScreen
+import screen
 import actions
 
 def main(stdscr):
@@ -19,7 +19,7 @@ def main(stdscr):
 
     # tela inicial do jogo
 
-    titleScreen.show_title_screen(stdscr)
+    screen.show_title_screen(stdscr)
 
     # Opcao atual do menu
     current_row_idx = 0
