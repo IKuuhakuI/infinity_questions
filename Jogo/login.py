@@ -2,7 +2,7 @@ import pyrebase
 import curses
 import textPrint
 
-import time
+import timer
 
 def start_login(stdscr):
     # Define as cores que serao utilizadas
@@ -30,12 +30,12 @@ def start_login(stdscr):
     # Faz conexao com Firebase
     firebase = pyrebase.initialize_app(config)
 
-    tentativas_restantes = 8
+    tentativas_restantes = 1
 
     while True:
         if tentativas_restantes == 0:
-            time.sleep(10)
-            tentativas_restantes = 8
+            timer.block_screen(stdscr)
+            stdscr.clear()
 
         textPrint.print_title(stdscr)
 
