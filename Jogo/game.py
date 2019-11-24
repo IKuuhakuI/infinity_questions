@@ -85,9 +85,3 @@ def show_game_menu(stdscr, current_user):
         stdscr.refresh()
 
         textPrint.print_title(stdscr)
-
-def teste(stdscr):
-    user_id = 12
-    show_game_menu(stdscr, user_id)
-
-curses.wrapper(teste)
