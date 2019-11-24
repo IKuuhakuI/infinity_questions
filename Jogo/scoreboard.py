@@ -81,7 +81,7 @@ def show_scoreboard(stdscr):
 
     print_scoreboard(stdscr)
 
-    menu.back_btn(stdscr, 0, menu_scoreboard)
+    menu.std_btn(stdscr, 0, menu_scoreboard)
 
     textPrint.print_title(stdscr)
     
