@@ -1,6 +1,8 @@
 import pyrebase
 import curses
+
 import textPrint
+import actions
 
 def start_registrar(stdscr):
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -34,7 +36,7 @@ def start_registrar(stdscr):
 	while True:
 		textPrint.print_bottom(stdscr, exitMessage)
 		textPrint.print_title(stdscr)
-		
+
 		curses.curs_set(True)
 
 		name_label = "Nome: "
@@ -59,7 +61,7 @@ def start_registrar(stdscr):
 
 		user_name = user_name.decode("utf-8")
 
-		if user_name == "/exit":
+		if actions.verify_exit(user_name) == True:
 			exitRegister = True
 			break
 
@@ -67,14 +69,14 @@ def start_registrar(stdscr):
 		user_password = stdscr.getstr(y_senha,x_senha + len(pass_label),15)
 		user_password = user_password.decode("utf-8")
 
-		if user_password == "/exit":
+		if actions.verify_exit(user_password) == True:
 			exitRegister = True
 			break
 
 		user_confirm_password = stdscr.getstr(y_confirm, x_confirm + len(confirm_pass_label), 15)
 		user_confirm_password = user_confirm_password.decode("utf-8")
 
-		if user_confirm_password == "/exit":
+		if actions.verify_exit(user_confirm_password) == True:
 			exitRegister = True
 			break
 

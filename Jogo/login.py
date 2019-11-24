@@ -1,8 +1,8 @@
 import pyrebase
 import curses
+
 import textPrint
 import actions
-
 import timer
 
 def start_login(stdscr):
