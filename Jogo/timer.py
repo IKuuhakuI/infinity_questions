@@ -8,12 +8,12 @@ def block_screen(stdscr):
     
     stdscr.attron(curses.color_pair(1))
 
-    for tempo in range(10):
+    for tempo in range(60):
         stdscr.clear()
         
         textPrint.print_title(stdscr)
 
-        tempo_faltando = "Tempo faltando: " + str(10 - tempo)
+        tempo_faltando = "Tempo faltando: " + str(60 - tempo) + " segundos"
         
         textPrint.print_center(stdscr,tempo_faltando)
 

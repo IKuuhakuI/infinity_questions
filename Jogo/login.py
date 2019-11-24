@@ -41,10 +41,6 @@ def start_login(stdscr):
     tentativas_restantes = 8
 
     while True:
-        if tentativas_restantes == 0:
-            timer.block_screen(stdscr)
-            stdscr.clear()
-
         textPrint.print_title(stdscr)
         textPrint.print_bottom(stdscr, exitMessage)
 
@@ -175,6 +171,10 @@ def start_login(stdscr):
                     current_row_idx += 1
 
                 elif key == curses.KEY_ENTER or key in [10,13]:
+                    if tentativas_restantes == 0:
+                        timer.block_screen(stdscr)
+                        stdscr.clear()
+
                     if current_row_idx == 0:
                         stop = False
                         break
