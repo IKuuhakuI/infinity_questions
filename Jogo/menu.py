@@ -28,9 +28,6 @@ def print_menu(stdscr, selected_row_idx, current_menu):
 
 # Funcao que cria botao voltar
 def back_btn(stdscr, selected_row_idx, current_menu):
-    # Limpa a Tela
-    stdscr.clear()
-
     # Altura e Largura da Tela
     altura, largura = stdscr.getmaxyx()
     

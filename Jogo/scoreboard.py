@@ -1,5 +1,6 @@
 import pyrebase
 import curses
+import time
 
 import menu
 import textPrint
@@ -36,19 +37,25 @@ def print_scoreboard(stdscr):
 
     score_list = get_top_5_high_score()
 
+    text_list = []
+
     for score in range(len(score_list)):
         user_name = score_list[score][0]
         user_score = score_list[score][1]
 
         if user_name == "Nil":
-            text = str(score + 1) + "-\t----------------" 
+            text = str(score + 1) + "- --------------" 
         else:
-            text = str(score + 1) + "-\t" + user_name + "\t- Score: " + str(user_score)
+            text = str(score + 1) + "- " + user_name + " - Score: " + str(user_score)
 
-        x = largura_tela//2 - 5 - len(text)//2
-        y = altura_tela//2 - len(score_list) + score
+        text_list.append(text)
 
-        stdscr.addstr(y, x, text)
+        #x = largura_tela//2 - 5 - len(text)//2
+        #y = altura_tela//2 - len(score_list) + score
+
+        #stdscr.addstr(y, x, text)
+
+    textPrint.print_multi_lines(stdscr, text_list, len(text_list))
 
 def show_scoreboard(stdscr):
     curses.curs_set(0)
@@ -64,12 +71,24 @@ def show_scoreboard(stdscr):
     # Altura e Largura da Tela
     altura_tela, largura_tela = stdscr.getmaxyx()
 
-    menu.back_btn(stdscr, 0, menu_scoreboard)
+    textPrint.print_center(stdscr, "Carregando...")
+    stdscr.refresh()
 
     textPrint.print_title(stdscr)
 
+    textPrint.erase_center(stdscr, "Carregando...")
+
     print_scoreboard(stdscr)
 
-    stdscr.getch()
+    menu.back_btn(stdscr, 0, menu_scoreboard)
 
+    textPrint.print_title(stdscr)
+    
     stdscr.refresh()
+
+    while True:    
+        key = stdscr.getch()
+        if key == curses.KEY_ENTER or key in [10,13]:
+            break
+
+    

@@ -36,6 +36,23 @@ def print_center(stdscr, text):
  
     stdscr.addstr(y_text, x_text, text)
 
+# Imprime uma linha no centro da tela
+def erase_center(stdscr, text):
+    curses.curs_set(0)
+    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_BLACK)
+
+    # Coloca a cor atual como sendo o primeiro par
+    stdscr.attron(curses.color_pair(3))
+
+    # Altura e Largura da Tela
+    altura_tela, largura_tela = stdscr.getmaxyx()
+
+    # Coordenadas do texto
+    x_text = largura_tela//2 - len(text)//2
+    y_text = altura_tela//2
+ 
+    stdscr.addstr(y_text, x_text, text)
+
 # Imprime varias linhas no centro da tela
 def print_multi_lines(stdscr, text_list, lines):
     curses.curs_set(0)
