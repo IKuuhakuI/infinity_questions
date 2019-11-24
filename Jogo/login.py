@@ -38,6 +38,8 @@ def start_login(stdscr):
 
     stop = False
 
+    tentativas_restantes = 8
+
     while True:
         if tentativas_restantes == 0:
             timer.block_screen(stdscr)
@@ -96,6 +98,7 @@ def start_login(stdscr):
         
         stdscr.clear()
 
+        textPrint.print_title(stdscr)
         textPrint.print_center(stdscr, "Aguarde...")
         stdscr.refresh()
 
