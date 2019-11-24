@@ -3,6 +3,7 @@ import curses
 
 import textPrint
 import actions
+import menu
 
 def start_registrar(stdscr):
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -32,6 +33,8 @@ def start_registrar(stdscr):
 	exitRegister = False
 
 	exitMessage = "Para sair, digite /exit no nome ou senha"
+
+	yes_no_menu = ('Sim', 'Nao')
 
 	while True:
 		textPrint.print_bottom(stdscr, exitMessage)
@@ -110,14 +113,39 @@ def start_registrar(stdscr):
 
 		else:
 			stdscr.clear()
-			error_message = ["ERRO AO CRIAR USUARIO", "Pressione qualquer tecla para continuar"]
 
-			textPrint.print_title(stdscr)
-			textPrint.print_multi_lines(stdscr, error_message, 2)
+			tentar_novamente = "Deseja tentar novamente?"
+			error_message = ["ERRO AO CRIAR USUARIO", tentar_novamente]
+
+			current_row_idx = 0
+
+			while True:
+				textPrint.print_title(stdscr)
+				textPrint.print_multi_lines(stdscr, error_message, 2)
+				menu.horizontal_menu(stdscr, current_row_idx, yes_no_menu)
 			
-			stdscr.refresh()
-			stdscr.getch()
-			stdscr.clear()
+				stdscr.refresh()
+
+				key = stdscr.getch()
+
+				if key == curses.KEY_LEFT and current_row_idx > 0:
+				    current_row_idx -= 1
+
+				elif key == curses.KEY_RIGHT and current_row_idx < 1:
+				    current_row_idx += 1
+
+				elif key == curses.KEY_ENTER or key in [10,13]:
+				    if current_row_idx == 0:
+				        exitRegister = False
+				        break
+				    else:
+				        exitRegister = True
+				        break
+
+		stdscr.clear()
+
+		if exitRegister == True:
+			break
 
 	if exitRegister == False:
 		new_user_id = quantidade_users + 1
