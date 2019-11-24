@@ -1,7 +1,9 @@
 import curses
 
 import actions
+import getUser
 import menu
+import pyrebase
 import textPrint
 
 def show_game_menu(stdscr, current_user):
@@ -21,12 +23,16 @@ def show_game_menu(stdscr, current_user):
     # Imprime o menu do Jogo
     menu.print_menu(stdscr, current_row_idx, menu_jogo)
 
-    # Imprime o usuario atual
-    textPrint.print_bottom(stdscr, "Usuario: " + str(current_user))
-
-
     # Imprime o titulo do jogo
     textPrint.print_title(stdscr)
+
+    # Pega os dados do usuario que esta logado
+    current_user_data = getUser.get_user_data(current_user)
+    current_user_name = current_user_data["Name"] 
+    current_user_high_score = current_user_data["Highscore"]
+
+    # Imprime o usuario atual
+    textPrint.print_bottom(stdscr, "Usuario: " + current_user_name + " | " + str(current_user_high_score))
 
     while True:
         key = stdscr.getch()
@@ -66,13 +72,14 @@ def show_game_menu(stdscr, current_user):
         menu.print_menu(stdscr, current_row_idx, menu_jogo)
 
         # Imprime o usuario atual
-        textPrint.print_bottom(stdscr, "Usuario: " + str(current_user))
+        textPrint.print_bottom(stdscr, "Usuario: " + current_user_name + " | " + str(current_user_high_score))
         
         stdscr.refresh()
 
         textPrint.print_title(stdscr)
 
 def teste(stdscr):
-    show_game_menu(stdscr, 1)
+    user_id = 6
+    show_game_menu(stdscr, user_id)
 
 curses.wrapper(teste)
