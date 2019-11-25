@@ -11,9 +11,14 @@ def verify_back(entrada):
 	return False
 
 def verify_next(entrada):
-	if entreada == "/next":
+	if entrada == "/next":
 		return True
 	return False
+
+def verify_giveup(entrada):
+    if entrada == "/giveup":
+        return True
+    return False
 
 def keyboard(entrada):
     if entrada == curses.KEY_UP:
