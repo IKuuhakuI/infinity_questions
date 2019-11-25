@@ -66,8 +66,6 @@ def show_game_menu(stdscr, current_user):
                 break
 
             elif current_row_idx == 0:
-                #textPrint.print_center(stdscr, "Jogar")
-                #stdscr.getch()
                 stdscr.clear()
                 play.final_game(stdscr)
 
