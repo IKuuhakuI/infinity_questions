@@ -2,6 +2,7 @@ import curses
 import textPrint
 import actions
 import menu
+import scoreboard
 
 #Tela inicial
 def show_title_screen(stdscr):
@@ -57,4 +58,42 @@ def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 	while True:
 		if actions.keyboard(key) == 'enter':
 			break
+
+#Adicionando tela de Scoreboard:
+
+def show_scoreboard(stdscr):
+    curses.curs_set(0)
+
+    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+    
+    menu_scoreboard = ["Voltar"]
+
+    # Coloca a cor atual como sendo o primeiro par
+    stdscr.attron(curses.color_pair(1))
+
+    # Altura e Largura da Tela
+    altura_tela, largura_tela = stdscr.getmaxyx()
+
+    textPrint.print_title(stdscr)
+
+    textPrint.print_center(stdscr, "Carregando...")
+    stdscr.refresh()
+
+    textPrint.print_title(stdscr)
+
+    textPrint.erase_center(stdscr, "Carregando...")
+
+    scoreboard.print_scoreboard(stdscr)
+
+    menu.std_btn(stdscr, 0, menu_scoreboard)
+
+    textPrint.print_title(stdscr)
+    
+    stdscr.refresh()
+
+    while True:    
+        key = stdscr.getch()   
+        if actions.keyboard(key) == 'enter':
+            break
 

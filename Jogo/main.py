@@ -77,7 +77,7 @@ def main(stdscr):
 
             # Caso selecione a opcao de scoreboard  
             elif current_row_idx == 2:
-                scoreboard.show_scoreboard(stdscr)
+                screen.show_scoreboard(stdscr)
 
 
             # Mensagem quando user escolhe alguma opcao

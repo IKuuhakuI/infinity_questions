@@ -76,7 +76,7 @@ def show_game_menu(stdscr, current_user):
                 stdscr.getch()
 
             elif current_row_idx == 2:
-                scoreboard.show_scoreboard(stdscr)
+                screen.show_scoreboard(stdscr)
 
             stdscr.refresh()
 
