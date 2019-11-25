@@ -6,6 +6,8 @@ import menu
 import pyrebase
 import textPrint
 import scoreboard
+import play
+import screen
 
 def show_game_menu(stdscr, current_user):
     # Menu com as opcoes para o jogo 
@@ -64,8 +66,12 @@ def show_game_menu(stdscr, current_user):
                 break
 
             elif current_row_idx == 0:
-                textPrint.print_center(stdscr, "Jogar")
-                stdscr.getch()
+                #textPrint.print_center(stdscr, "Jogar")
+                #stdscr.getch()
+                stdscr.clear()
+                play.final_game(stdscr)
+
+
 
             elif current_row_idx == 1:
                 textPrint.print_center(stdscr, "Perguntas")
