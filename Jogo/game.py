@@ -8,6 +8,7 @@ import textPrint
 import scoreboard
 import play
 import screen
+import menuPerguntas
 
 def show_game_menu(stdscr, current_user):
     # Menu com as opcoes para o jogo 
@@ -72,8 +73,7 @@ def show_game_menu(stdscr, current_user):
 
 
             elif current_row_idx == 1:
-                textPrint.print_center(stdscr, "Perguntas")
-                stdscr.getch()
+                 menuPerguntas.show_perguntas_menu(stdscr, current_user)
 
             elif current_row_idx == 2:
                 screen.show_scoreboard(stdscr)
