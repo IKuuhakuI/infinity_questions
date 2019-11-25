@@ -35,12 +35,26 @@ def show_new_global_record(stdscr, pontuacao):
 # Tela de novo recorde pessoal
 def show_new_personal_record(stdscr, pontuacao):
 	textPrint.print_title(stdscr)
-	lista_texto_global = ['pontuacao: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!']
+	lista_texto_personal = ['pontuacao: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!']
 	linhas = 2
-	textPrint.print_multi_lines(stdscr, lista_texto_global, linhas)
+	textPrint.print_multi_lines(stdscr, lista_texto_personal, linhas)
 	botao = ["continuar"]
 	menu.std_btn(stdscr, 0, botao)
 	key = stdscr.getch()
 	while True:
 		if actions.keyboard(key) == 'enter':
 			break
+
+# Tela caso nao consiga nenhum novo recorde
+def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
+	textPrint.print_title(stdscr)
+	lista_texto_sem_recorde = ['Resposta Errada!! Fim de Jogo :(','Pontuacao: ' + str(pontuacao), 'Que tal tentar mais uma vez? Talvez voce consiga quebrar o recorde atual!', 'Recorde global :' + str(recorde_global), 'Recorde pessoal :' + str(recorde_pessoal)]
+	linhas = 5
+	textPrint.print_multi_lines(stdscr, lista_texto_sem_recorde, linhas)
+	botao = ["continuar"]
+	menu.std_btn(stdscr, 0, botao)
+	key = stdscr.getch()
+	while True:
+		if actions.keyboard(key) == 'enter':
+			break
+
