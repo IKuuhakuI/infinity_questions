@@ -72,6 +72,8 @@ def show_scoreboard(stdscr):
     # Altura e Largura da Tela
     altura_tela, largura_tela = stdscr.getmaxyx()
 
+    textPrint.print_title(stdscr)
+
     textPrint.print_center(stdscr, "Carregando...")
     stdscr.refresh()
 
