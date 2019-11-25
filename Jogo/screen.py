@@ -20,7 +20,7 @@ def show_welcome_screen(stdscr):
 	textPrint.print_multi_lines(stdscr, lista_texto_welcome, linhas)
 	stdscr.getch()
 
-#Tela de novo recorde global 
+# Tela de novo recorde global 
 def show_new_global_record(stdscr, pontuacao):
 	textPrint.print_title(stdscr)
 	lista_texto_global = ['pontuacao: ' + str(pontuacao), 'Novo recorde global! Parabens!']
@@ -32,5 +32,15 @@ def show_new_global_record(stdscr, pontuacao):
 	while True:
 		if actions.keyboard(key) == 'enter':
 			break
-
-#Tela de novo recorde pessoal
+# Tela de novo recorde pessoal
+def show_new_personal_record(stdscr, pontuacao):
+	textPrint.print_title(stdscr)
+	lista_texto_global = ['pontuacao: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!']
+	linhas = 2
+	textPrint.print_multi_lines(stdscr, lista_texto_global, linhas)
+	botao = ["continuar"]
+	menu.std_btn(stdscr, 0, botao)
+	key = stdscr.getch()
+	while True:
+		if actions.keyboard(key) == 'enter':
+			break
