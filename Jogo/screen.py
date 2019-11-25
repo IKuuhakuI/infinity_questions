@@ -1,6 +1,7 @@
 import curses
 import textPrint
 import actions
+import menu
 
 #Tela inicial
 def show_title_screen(stdscr):
@@ -25,6 +26,11 @@ def show_new_global_record(stdscr, pontuacao):
 	lista_texto_global = ['pontuacao: ' + str(pontuacao), 'Novo recorde global! Parabens!']
 	linhas = 2
 	textPrint.print_multi_lines(stdscr, lista_texto_global, linhas)
-	stdscr.getch()
+	botao = ["continuar"]
+	menu.std_btn(stdscr, 0, botao)
+	key = stdscr.getch()
+	while True:
+		if actions.keyboard(key) == 'enter':
+			break
 
 #Tela de novo recorde pessoal
