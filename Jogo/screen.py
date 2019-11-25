@@ -59,6 +59,30 @@ def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 		if actions.keyboard(key) == 'enter':
 			break
 
+# Tela de "deseja sair"
+def deseja_sair(stdscr):
+	textPrint.print_title(stdscr)
+	textPrint.print_center(stdscr, 'Tem certeza que deseja sair?')
+	botao = ['Sim', 'Não']
+	menu.horizontal_menu(stdscr, 0, botao)
+	stdscr.getch()
+	
+# Tela de pergunta apagada
+def pergunta_apagada(stdscr):
+	curses.curs_set(0)
+
+	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+	textPrint.print_title(stdscr)
+	textPrint.print_center(stdscr, 'Pergunta Apagada!')
+	botao = ["Continuar"]
+	menu.std_btn(stdscr, 0, botao)
+	stdscr.refresh()
+	key = stdscr.getch()
+	while True:
+		if actions.keyboard(key) == 'enter':
+			break
+
 #Adicionando tela de Scoreboard:
 
 def show_scoreboard(stdscr):
@@ -97,3 +121,4 @@ def show_scoreboard(stdscr):
         if actions.keyboard(key) == 'enter':
             break
 
+curses.wrapper(deseja_sair)
