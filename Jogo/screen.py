@@ -58,15 +58,29 @@ def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 	while True:
 		if actions.keyboard(key) == 'enter':
 			break
-
+	
 # Tela de "deseja sair"
 def deseja_sair(stdscr):
+	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+
 	textPrint.print_title(stdscr)
 	textPrint.print_center(stdscr, 'Tem certeza que deseja sair?')
 	botao = ['Sim', 'Não']
-	menu.horizontal_menu(stdscr, 0, botao)
-	stdscr.getch()
-	
+	selected_row_idx = 0
+	stdscr.refresh()
+	menu.horizontal_menu(stdscr, selected_row_idx, botao)
+	while True:
+		key = stdscr.getch()
+		stdscr.refresh()
+		if actions.keyboard(key) == 'left' and selected_row_idx > 0:
+			selected_row_idx -= 1
+		elif actions.keyboard(key) == 'right' and selected_row_idx < 1:
+			selected_row_idx += 1
+		stdscr.clear()
+		menu.horizontal_menu(stdscr, selected_row_idx, botao)	
+		stdscr.refresh()
+
 # Tela de pergunta apagada
 def pergunta_apagada(stdscr):
 	curses.curs_set(0)
