@@ -16,7 +16,7 @@ def verify_next(entrada):
 	return False
 
 def verify_giveup(entrada):
-    if entrada == "/giveup":
+    if entrada in [71, 103]:
         return True
     return False
 
