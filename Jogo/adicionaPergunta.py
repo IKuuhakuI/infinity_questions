@@ -2,13 +2,17 @@
 #para implementar isso no cogigo, basta chamar essa primeira funcao adiciona_pergunta
 #Esta faltando ligar a pergunta que o usuario enviou ao proprio perfil dele
 
-import pyrebase 
-import getData
+# Bibliotecas existentes
 import curses
-import textPrint
-import menu
-import actions
+import pyrebase
 
+# Arquivos de funcoes criadas 
+import actions
+import getData
+import menu
+import textPrint
+
+# Funcao para adicionar as perguntas
 def adiciona_pergunta(stdscr, current_user_id, current_user_data):
 	continuar_voltar_menu = ('Continuar', 'Voltar')
 
@@ -29,40 +33,54 @@ def adiciona_pergunta(stdscr, current_user_id, current_user_data):
 	regras_para_adicionar = [linha1, linha2, linha3, linha4, linha5, linha6]
 
 	current_row_idx = 0
+
 	while True:
 		textPrint.print_title(stdscr)
+		
+		# Imprime as regras no centro da tela
 		textPrint.print_multi_lines(stdscr, regras_para_adicionar, 6)
+		
+		# Menu de continuar / voltar
 		menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
-			
+		
 		stdscr.refresh()
 
+		# Entrada do teclado
 		key = stdscr.getch()
 
+
+		# Navegar pelo menu
 		if actions.keyboard(key) == 'left' and current_row_idx > 0:
 			current_row_idx -= 1
-
 		elif actions.keyboard(key) == 'right' and current_row_idx < 1:
 			current_row_idx += 1
 
+		# Caso selecione uma opcao
 		elif actions.keyboard(key) == 'enter':
+			# Caso selecione continuar
 			if current_row_idx == 0:
 				stdscr.clear()
+
+				# Funcao que adiciona perguntas no jogo
 				escreve_pergunta(stdscr, current_user_id, current_user_data)
+				
 				stdscr.clear()
 				stdscr.clear()
 
-
+			# Caso selecione voltar
 			else:
 				break
 
-	########################################
-def escreve_pergunta(stdscr, current_user_id, current_user_data):
+######################################################################
 
+# Funcao que pergunta sobre a pergunta que o user quer escrever
+def escreve_pergunta(stdscr, current_user_id, current_user_data):
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
 	stdscr.attron(curses.color_pair(1))
 
+	# Conexao com o banco de dados
 	config = {
 	    "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
         "authDomain": "teste-python-67d43.firebaseapp.com",
@@ -73,15 +91,17 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data):
         "appId": "1:581051665954:web:6f131448200a100689447b"
     }
 
+    # Dimensoes da tela
 	altura_tela, largura_tela = stdscr.getmaxyx()
 
 	# Faz conexao com Firebase
 	firebase = pyrebase.initialize_app(config)
 
+	# Pega a quantidade de perguntas que existem no jogo
 	db_quantidade_perguntas = firebase.database()
-
 	quantidade_perguntas = db_quantidade_perguntas.child("Quantidade_Perguntas").get().val()
 
+	# Variavel de controle
 	exitRegister = False
 
 	exitMessage = "Para sair, digite /exit"
@@ -89,33 +109,43 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data):
 	yes_no_menu = ('Sim', 'Nao')
 
 	while True:
+		# Imprime mensagem para sair da tela
 		textPrint.print_bottom(stdscr, exitMessage)
+		# Imprime o titulo do jogo
 		textPrint.print_title(stdscr)
 
+		# Habilita visualizacao do cursor
 		curses.curs_set(True)
 
 		pergunta_label = "Informe a pergunta: "
 
+		# Coordenadas da area para escrever a pergunta
 		x_pergunta = largura_tela//2 - 50 - len(pergunta_label)//2
 		y_pergunta = altura_tela//2
 
+		# Imprime a pergunta na tela
 		stdscr.addstr(y_pergunta, x_pergunta, pergunta_label)
 
+		# Habilita para o usuarop escrever na tela
 		curses.echo()
 
 		user_pergunta = stdscr.getstr(y_pergunta, x_pergunta + len(pergunta_label),100)
 		user_pergunta = user_pergunta.decode("utf-8")
-		#dentro desse if ta vendo se o usuario digitou /exit pra sair dessa funcao
+		# Verifica se usuario digitou /exit
+
 		if actions.verify_exit(user_pergunta) == True:
+			# variavel que indica que o user saiu
 			exitRegister = True
 			break
 
+		# Desabilita a visualização do cursor 
 		curses.echo(False)
 		
+		# Variavel que verifica se pergunta e unica
 		isUnique = True
 
+		# Dados de todas as perguntas
 		db_all_perguntas = firebase.database()
-
 		stdscr.clear()
 
 		textPrint.print_title(stdscr)
@@ -123,20 +153,26 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data):
 
 		stdscr.refresh()
 
+		# Loop para verificar se pergunta e unica
 		for pergunta in range (quantidade_perguntas):
+			# Dados da pergunta atual
 			this_pergunta = db_all_perguntas.child("Perguntas").child(pergunta + 1).child("Pergunta").get().val()
 
 			if user_pergunta == this_pergunta:
 				isUnique = False
 				break
-		#
+		
+		# Caso a pergunta seja unica
 		if isUnique == True and len(user_pergunta) > 3 and len(user_pergunta) <= 100:
 			stdscr.clear()
 			desistencia_da_resposta = 0
+
+			# Chama funcao que pergunta sobre as respostas
 			desistencia_da_resposta = escreve_respostas(stdscr)
 
 			break
-		#	
+		
+		# Caso de errado	
 		else:
 			stdscr.clear()
 
@@ -145,6 +181,7 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data):
 
 			current_row_idx = 0
 
+			# Tela de erro
 			while True:
 				textPrint.print_title(stdscr)
 				textPrint.print_multi_lines(stdscr, error_message, 2)
@@ -170,9 +207,11 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data):
 
 		stdscr.clear()
 
+		# Caso o user queira sair
 		if exitRegister == True:
 			break
 	
+	# Escreve os dados obtidos no banco de dados
 	if exitRegister == False and desistencia_da_resposta != False:
 		new_pergunta_id = quantidade_perguntas + 1
 		db_new_pergunta = firebase.database()
