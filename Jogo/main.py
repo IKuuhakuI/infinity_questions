@@ -9,13 +9,17 @@ import textPrint
 import screen
 import actions
 
+def start_screen():
+    screen.resize_screen()
+    input("Aperte qualquer coisa para abrir o jogo...")
+    curses.wrapper(main)
+
 def main(stdscr):
     # Menu com as opcoes de login
     menu_login = ('Login', 'Registrar', 'Scoreboard', 'Sair')
 
     # Esconde o cursor 
     curses.curs_set(0)
-
 
     # tela inicial do jogo
 
@@ -92,5 +96,6 @@ def main(stdscr):
         menu.print_menu(stdscr, current_row_idx, menu_login)
         stdscr.refresh()
         textPrint.print_title(stdscr)
-        
-curses.wrapper(main)
+ 
+start_screen()       
+#curses.wrapper(main)
