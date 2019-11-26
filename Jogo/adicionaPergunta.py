@@ -95,7 +95,7 @@ def escreve_pergunta(stdscr):
 
 		pergunta_label = "Informe a pergunta: "
 
-		x_pergunta = largura_tela//2 - 100
+		x_pergunta = largura_tela//2 - 50 - len(pergunta_label)//2
 		y_pergunta = altura_tela//2
 
 		stdscr.addstr(y_pergunta, x_pergunta, pergunta_label)
