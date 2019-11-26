@@ -43,6 +43,3 @@ def get_questions_data():
     final_list = random_questions(final_list)
 
     return final_list
-
-print(get_questions_data())
-
