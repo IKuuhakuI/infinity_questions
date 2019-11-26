@@ -46,15 +46,15 @@ def get_questions_data():
 
 def get_right_answer(dict_respostas):
     if dict_respostas['a']['isCorrect'] == True:
-        return 'a'
+        return [65,97]
     
     elif dict_respostas['b']['isCorrect'] == True:
-        return 'b'
+        return [66,98]
     
     elif dict_respostas['c']['isCorrect'] == True:
-        return 'c'
+        return [67, 99]
 
-    return 'd'
+    return [68,100]
 
 def get_answer(id):
     config = {
