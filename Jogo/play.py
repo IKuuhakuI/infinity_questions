@@ -6,7 +6,7 @@ import curses
 import actions
 import screen
 import textPrint 
-import getQuestions
+import getData
 
 def final_game(stdscr):
     # A, B, C, D, G, a, b, c, d, g
@@ -25,7 +25,7 @@ def final_game(stdscr):
     stdscr.refresh()
 
     # Lista com as perguntas do Jogo
-    lista_perguntas = getQuestions.get_questions_data()
+    lista_perguntas = getData.get_questions_data()
     stdscr.clear()
 
     hasGivenUp = False
@@ -37,8 +37,8 @@ def final_game(stdscr):
         pergunta_atual = "Pergunta " + str(pergunta + 1) + ": " + lista_perguntas[pergunta]["Pergunta"]
         id_atual = lista_perguntas[pergunta]["Id"]
         
-        dict_respostas = getQuestions.get_answer(id_atual)
-        right_answer = getQuestions.get_right_answer(dict_respostas)
+        dict_respostas = getData.get_answer(id_atual)
+        right_answer = getData.get_right_answer(dict_respostas)
         
         resposta_a = 'a)' + str(dict_respostas['a']['valor'])
         resposta_b = 'b)' + str(dict_respostas['b']['valor'])

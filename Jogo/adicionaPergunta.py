@@ -3,7 +3,7 @@
 #Esta faltando ligar a pergunta que o usuario enviou ao proprio perfil dele
 
 import pyrebase 
-import getUser
+import getData
 import curses
 import textPrint
 import menu

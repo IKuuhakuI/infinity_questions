@@ -3,7 +3,7 @@
 import curses
 
 import actions
-import getUser
+import getData
 import menu
 import pyrebase
 import textPrint
@@ -34,7 +34,7 @@ def show_perguntas_menu(stdscr, current_user):
     stdscr.refresh()
 
     # Pega os dados do usuario que esta logado
-    current_user_data = getUser.get_user_data(current_user)
+    current_user_data = getData.get_user_data(current_user)
     current_user_name = current_user_data["Name"] 
     current_user_high_score = current_user_data["Highscore"]
 
@@ -116,7 +116,7 @@ def show_editar_perguntas_menu(stdscr, current_user):
     stdscr.refresh()
 
     # Pega os dados do usuario que esta logado
-    current_user_data = getUser.get_user_data(current_user)
+    current_user_data = getData.get_user_data(current_user)
     current_user_name = current_user_data["Name"] 
     current_user_high_score = current_user_data["Highscore"]
 
