@@ -15,7 +15,7 @@ def final_game(stdscr):
     # Imprime titulo do jogo
     textPrint.print_title(stdscr)
     # Imprime regras do jogo
-    screen.show_welcome_screen(stdscr)
+    screen.show_rules_screen(stdscr)
     stdscr.clear()
 
     # Imprime titulo do jogo
