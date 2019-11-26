@@ -48,6 +48,23 @@ def show_new_personal_record(stdscr, pontuacao):
 		if actions.keyboard(key) == 'enter':
 			break
 
+# Tela de novo recorde global e pessoal ao mesmo tempo
+def new_global_personal_record(stdscr, pontuacao):
+	curses.curs_set(0)
+
+	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+	textPrint.print_title(stdscr)
+	texto_global_pessoal = ['Pontuacão: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!', 'Novo recorde Global! Parabens!']
+	linhas = 3
+	textPrint.print_multi_lines(stdscr, texto_global_pessoal, linhas)
+	botao = ['Continuar']
+	menu.std_btn(stdscr, 0, botao)
+	key = stdscr.getch()
+	while True:
+		if actions.keyboard(key) == 'enter':
+			break
+
 # Tela caso nao consiga nenhum novo recorde
 def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 	textPrint.print_title(stdscr)
