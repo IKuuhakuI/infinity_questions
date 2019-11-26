@@ -44,6 +44,18 @@ def get_questions_data():
 
     return final_list
 
+def get_right_answer(dict_respostas):
+    if dict_respostas['a']['isCorrect'] == True:
+        return 'a'
+    
+    elif dict_respostas['b']['isCorrect'] == True:
+        return 'b'
+    
+    elif dict_respostas['c']['isCorrect'] == True:
+        return 'c'
+
+    return 'd'
+
 def get_answer(id):
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
@@ -62,3 +74,5 @@ def get_answer(id):
     answers_list = db_answers.child("Respostas").child(id).get().val()
 
     return answers_list
+
+print(get_right_answer(get_answer(2)))
