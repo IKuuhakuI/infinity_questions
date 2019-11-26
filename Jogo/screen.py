@@ -4,7 +4,7 @@ import actions
 import menu
 import scoreboard
 
-#Tela inicial
+# Tela inicial
 def show_title_screen(stdscr):
 	lista_textos_iniciais = ['Infinity Questions', 'Aperte enter para continuar']
 	linhas = 2
@@ -14,7 +14,8 @@ def show_title_screen(stdscr):
 		key = stdscr.getch()
 		if actions.keyboard(key) == 'enter':
 			break
-# tela que vem logo apos o usuario entrar em "jogar"
+
+# Tela que vem logo apos o usuario clicar em 'jogar'
 def show_welcome_screen(stdscr):
 	lista_texto_welcome = ['Bem Vindo ao Infinity Questions!','O objetivo é ver quem consegue acertar o maximo de perguntas sem errar!','Você acha que consegue quebrar o recorde?','Para continuar, aperte qualquer coisa...']
 	linhas = 4
@@ -33,6 +34,7 @@ def show_new_global_record(stdscr, pontuacao):
 	while True:
 		if actions.keyboard(key) == 'enter':
 			break
+
 # Tela de novo recorde pessoal
 def show_new_personal_record(stdscr, pontuacao):
 	textPrint.print_title(stdscr)
@@ -61,6 +63,8 @@ def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 	
 # Tela de "deseja sair"
 def deseja_sair(stdscr):
+	curses.curs_set(0)
+
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
@@ -77,8 +81,12 @@ def deseja_sair(stdscr):
 			selected_row_idx -= 1
 		elif actions.keyboard(key) == 'right' and selected_row_idx < 1:
 			selected_row_idx += 1
+		elif actions.keyboard(key) == 'enter':
+			break
 		stdscr.clear()
-		menu.horizontal_menu(stdscr, selected_row_idx, botao)	
+		textPrint.print_title(stdscr)
+		textPrint.print_center(stdscr, 'Tem certeza que deseja sair?')
+		menu.horizontal_menu(stdscr, selected_row_idx, botao)
 		stdscr.refresh()
 
 # Tela de pergunta apagada
@@ -98,7 +106,6 @@ def pergunta_apagada(stdscr):
 			break
 
 #Adicionando tela de Scoreboard:
-
 def show_scoreboard(stdscr):
     curses.curs_set(0)
 
