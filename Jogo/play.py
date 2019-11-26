@@ -3,11 +3,15 @@
 #Aqui dentro vai ser chamado as telas de recorde pessoal, global ou não recorde
 import curses
 
+import actions
 import screen
 import textPrint 
 import getQuestions
 
 def final_game(stdscr):
+    # A, B, C, D, G, a, b, c, d, g
+    caracteres_permitidos = [65,66,67,68,71,97,98,99,100,103]
+
     # Imprime titulo do jogo
     textPrint.print_title(stdscr)
     # Imprime regras do jogo
@@ -26,6 +30,8 @@ def final_game(stdscr):
 
     hasGivenUp = False
     hasLost = False
+
+    pontos = 0
 
     for pergunta in range(len(lista_perguntas)):
         pergunta_atual = "Pergunta " + str(pergunta + 1) + ": " + lista_perguntas[pergunta]["Pergunta"]
@@ -51,15 +57,13 @@ def final_game(stdscr):
             stdscr.clear()
             stdscr.refresh()
 
-            if key not in [65,66,67,68,71,97,98,99,100,103]:
-                print(key)
+            if key not in caracteres_permitidos:
                 textPrint.print_bottom(stdscr, "Entrada Invalida!")
 
             else:
-                if key in desistir:
+                if actions.verify_giveup(key) == True:
                     textPrint.print_bottom(stdscr, "Para confirmar desistencia, aperte s, caso contrario aperte outra tecla")
                     textPrint.print_multi_lines(stdscr, text_list, len(text_list))
-
 
                     confirm_key = stdscr.getch()
 
@@ -67,7 +71,14 @@ def final_game(stdscr):
                         hasGivenUp = True
                         break
 
+                    else:
+                        stdscr.clear()
+                        textPrint.print_multi_lines(stdscr, text_list, len(text_list))
+                        stdscr.refresh()
+
+
                 elif key in right_answer:
+                    pontos += 1
                     mensagem = ['Correto!', 'Aperte qualquer tecla para continuar']
                     textPrint.print_multi_lines(stdscr, mensagem, 2)
                     stdscr.getch()
@@ -75,6 +86,7 @@ def final_game(stdscr):
                     break
 
                 else:
+                    pontos = 0
                     mensagem = ['Errado!', 'Aperte qualquer tecla para continuar']
                     textPrint.print_multi_lines(stdscr, mensagem, 2)
                     hasLost = True
@@ -82,12 +94,12 @@ def final_game(stdscr):
                     stdscr.clear()
                     break
 
-            stdscr.clear()
-            stdscr.refresh()
             textPrint.print_multi_lines(stdscr, text_list, len(text_list))
             stdscr.refresh()
 
         if hasGivenUp == True or hasLost == True:
             break
-        
-curses.wrapper(final_game)
+
+    stdscr.clear()
+    textPrint.print_center(stdscr, "Pontuacao final = " + str(pontos))
+    stdscr.getch()

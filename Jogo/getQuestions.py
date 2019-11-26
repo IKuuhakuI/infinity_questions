@@ -36,10 +36,6 @@ def get_questions_data():
 
     final_list = create_question_list(question_list)
 
-    print(final_list)
-
-    print()
-
     final_list = random_questions(final_list)
 
     return final_list
@@ -74,5 +70,3 @@ def get_answer(id):
     answers_list = db_answers.child("Respostas").child(id).get().val()
 
     return answers_list
-
-print(get_right_answer(get_answer(2)))
