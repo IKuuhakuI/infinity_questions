@@ -1,8 +1,13 @@
+import sys
+
 import curses
 import textPrint
 import actions
 import menu
 import scoreboard
+
+def resize_screen():
+    sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=135))
 
 # Tela inicial
 def show_title_screen(stdscr):
