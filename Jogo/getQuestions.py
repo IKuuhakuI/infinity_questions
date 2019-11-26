@@ -43,3 +43,22 @@ def get_questions_data():
     final_list = random_questions(final_list)
 
     return final_list
+
+def get_answer(id):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    firebase = pyrebase.initialize_app(config)
+
+    db_answers = firebase.database()
+
+    answers_list = db_answers.child("Respostas").child(id).get().val()
+
+    return answers_list
