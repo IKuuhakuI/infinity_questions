@@ -21,10 +21,17 @@ def show_title_screen(stdscr):
 			break
 
 # Tela que vem logo apos o usuario clicar em 'jogar'
-def show_rules_screen(stdscr):
+def show_welcome_screen(stdscr):
 	lista_texto_rules = ['Bem Vindo ao Infinity Questions!','O objetivo é ver quem consegue acertar o maximo de perguntas sem errar!','Você acha que consegue quebrar o recorde?','Para continuar, aperte qualquer coisa...']
 	linhas = 4
 	textPrint.print_multi_lines(stdscr, lista_texto_rules, linhas)
+	stdscr.getch()
+
+# Tela que mostra as regras antes do usuario comecar a jogar
+def show_rules_screen(stdscr):
+	lista_texto_regras = ['Regras:', '1- Responda somente com (a), (b), (c) ou (d)', '2- Caso nao saiba responder e queira desistir, digite (g)', '3- Caso erre a resposta, o jogo acaba e voce nao ganha nenhum ponto', '4- Caso ganhe ou desista, a quatidade de pontos vai ser quantas peguntas voce acertou', 'Para continuar aperte qualuqer coisa...']
+	linhas = 6
+	textPrint.print_multi_lines(stdscr, lista_texto_regras, linhas)
 	stdscr.getch()
 
 # Tela de novo recorde global 
@@ -54,7 +61,7 @@ def show_new_personal_record(stdscr, pontuacao):
 			break
 
 # Tela de novo recorde global e pessoal ao mesmo tempo
-def new_global_personal_record(stdscr, pontuacao):
+def show_new_global_personal_record(stdscr, pontuacao):
 	curses.curs_set(0)
 
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -84,7 +91,7 @@ def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
 			break
 	
 # Tela de "deseja sair"
-def deseja_sair(stdscr):
+def show_deseja_sair(stdscr):
 	curses.curs_set(0)
 
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -112,7 +119,7 @@ def deseja_sair(stdscr):
 		stdscr.refresh()
 
 # Tela de pergunta apagada
-def pergunta_apagada(stdscr):
+def show_pergunta_apagada(stdscr):
 	curses.curs_set(0)
 
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -163,3 +170,5 @@ def show_scoreboard(stdscr):
         key = stdscr.getch()   
         if actions.keyboard(key) == 'enter':
             break
+
+curses.wrapper(show_rules_screen)
