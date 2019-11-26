@@ -27,8 +27,32 @@ def final_game(stdscr):
     hasGivenUp = False
     hasLost = False
 
-    textPrint.print_center(stdscr, lista_perguntas[0]["Pergunta"])
+    for pergunta in range(len(lista_perguntas)):
+        pergunta_atual = "Pergunta: " + lista_perguntas[pergunta]["Pergunta"]
+        id_atual = lista_perguntas[pergunta]["Id"]
+        
+        dict_respostas = getQuestions.get_answer(id_atual)
+        right_answer = getQuestions.get_right_answer(dict_respostas)
+        
+        resposta_a = 'a)' + str(dict_respostas['a']['valor'])
+        resposta_b = 'b)' + str(dict_respostas['b']['valor'])
+        resposta_c = 'c)' + str(dict_respostas['c']['valor'])
+        resposta_d = 'd)' + str(dict_respostas['d']['valor'])
 
-    stdscr.getch()
+        text_list = [pergunta_atual, resposta_a, resposta_b, resposta_c, resposta_d]
 
+        textPrint.print_multi_lines(stdscr, text_list, len(text_list))
+
+        key = stdscr.getch()
+
+        stdscr.clear()
+        stdscr.refresh()
+
+        if key in right_answer:
+            textPrint.print_center(stdscr, "Correto")
+        else:
+            textPrint.print_center(stdscr, "Errado")
+
+        stdscr.getch()
+        
 curses.wrapper(final_game)
