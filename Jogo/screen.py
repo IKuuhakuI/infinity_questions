@@ -141,5 +141,3 @@ def show_scoreboard(stdscr):
         key = stdscr.getch()   
         if actions.keyboard(key) == 'enter':
             break
-
-curses.wrapper(deseja_sair)
