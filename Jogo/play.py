@@ -28,7 +28,7 @@ def final_game(stdscr):
     hasLost = False
 
     for pergunta in range(len(lista_perguntas)):
-        pergunta_atual = "Pergunta: " + lista_perguntas[pergunta]["Pergunta"]
+        pergunta_atual = "Pergunta " + str(pergunta + 1) + ": " + lista_perguntas[pergunta]["Pergunta"]
         id_atual = lista_perguntas[pergunta]["Id"]
         
         dict_respostas = getQuestions.get_answer(id_atual)
@@ -43,16 +43,51 @@ def final_game(stdscr):
 
         textPrint.print_multi_lines(stdscr, text_list, len(text_list))
 
-        key = stdscr.getch()
+        desistir = [71, 103]
 
-        stdscr.clear()
-        stdscr.refresh()
+        while True:
+            key = stdscr.getch()
 
-        if key in right_answer:
-            textPrint.print_center(stdscr, "Correto")
-        else:
-            textPrint.print_center(stdscr, "Errado")
+            stdscr.clear()
+            stdscr.refresh()
 
-        stdscr.getch()
+            if key not in [65,66,67,68,71,97,98,99,100,103]:
+                print(key)
+                textPrint.print_bottom(stdscr, "Entrada Invalida!")
+
+            else:
+                if key in desistir:
+                    textPrint.print_bottom(stdscr, "Para confirmar desistencia, aperte s, caso contrario aperte outra tecla")
+                    textPrint.print_multi_lines(stdscr, text_list, len(text_list))
+
+
+                    confirm_key = stdscr.getch()
+
+                    if confirm_key in [83, 115]:
+                        hasGivenUp = True
+                        break
+
+                elif key in right_answer:
+                    mensagem = ['Correto!', 'Aperte qualquer tecla para continuar']
+                    textPrint.print_multi_lines(stdscr, mensagem, 2)
+                    stdscr.getch()
+                    stdscr.clear()
+                    break
+
+                else:
+                    mensagem = ['Errado!', 'Aperte qualquer tecla para continuar']
+                    textPrint.print_multi_lines(stdscr, mensagem, 2)
+                    hasLost = True
+                    stdscr.getch()
+                    stdscr.clear()
+                    break
+
+            stdscr.clear()
+            stdscr.refresh()
+            textPrint.print_multi_lines(stdscr, text_list, len(text_list))
+            stdscr.refresh()
+
+        if hasGivenUp == True or hasLost == True:
+            break
         
 curses.wrapper(final_game)
