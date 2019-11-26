@@ -15,7 +15,7 @@ import adicionaPergunta
 # funcao destinada ao menu Perguntas onde
 # as opcoes sao Adicionao Pergunta, Editar Pergunta e Retornar
 
-def show_perguntas_menu(stdscr, current_user):
+def show_perguntas_menu(stdscr, current_user, current_user_id):
     # Menu com as opcoes para o jogo 
     menu_perguntas = ('Adicionar Pergunta', 'Editar Pergunta', 'Voltar')
 
@@ -34,7 +34,7 @@ def show_perguntas_menu(stdscr, current_user):
     stdscr.refresh()
 
     # Pega os dados do usuario que esta logado
-    current_user_data = getData.get_user_data(current_user)
+    current_user_data = getData.get_user_data(current_user_id)
     current_user_name = current_user_data["Name"] 
     current_user_high_score = current_user_data["Highscore"]
 
@@ -75,12 +75,12 @@ def show_perguntas_menu(stdscr, current_user):
 
             # Opcao Adicionar Pergunta
             elif current_row_idx == 0:
-            	adicionaPergunta.adiciona_pergunta(stdscr)
+            	adicionaPergunta.adiciona_pergunta(stdscr, current_user_id, current_user_data)
                 
 
             # Opcao Editar Pergunta
             elif current_row_idx == 1:
-            	show_editar_perguntas_menu(stdscr, current_user)
+            	show_editar_perguntas_menu(stdscr, current_user_data)
 
             stdscr.refresh()
 

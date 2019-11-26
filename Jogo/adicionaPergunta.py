@@ -9,8 +9,7 @@ import textPrint
 import menu
 import actions
 
-def adiciona_pergunta(stdscr):
-	
+def adiciona_pergunta(stdscr, current_user_id, current_user_data):
 	continuar_voltar_menu = ('Continuar', 'Voltar')
 
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
@@ -46,7 +45,7 @@ def adiciona_pergunta(stdscr):
 		elif actions.keyboard(key) == 'enter':
 			if current_row_idx == 0:
 				stdscr.clear()
-				escreve_pergunta(stdscr)
+				escreve_pergunta(stdscr, current_user_id, current_user_data)
 				stdscr.clear()
 				stdscr.clear()
 
@@ -55,7 +54,7 @@ def adiciona_pergunta(stdscr):
 				break
 
 	########################################
-def escreve_pergunta(stdscr):
+def escreve_pergunta(stdscr, current_user_id, current_user_data):
 
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
@@ -133,8 +132,6 @@ def escreve_pergunta(stdscr):
 			stdscr.clear()
 			desistencia_da_resposta = 0
 			desistencia_da_resposta = escreve_respostas(stdscr)
-			
-
 
 			break
 		#	
@@ -173,32 +170,45 @@ def escreve_pergunta(stdscr):
 
 		if exitRegister == True:
 			break
-
-			
+	
 	if exitRegister == False and desistencia_da_resposta != False:
 		new_pergunta_id = quantidade_perguntas + 1
 		db_new_pergunta = firebase.database()
 		new_pergunta = db_new_pergunta.child("Perguntas").child(new_pergunta_id)
 
 		new_pergunta = {
-		"Pergunta": user_pergunta
+			"Pergunta": user_pergunta
 		}
 
 		db_qtd_pergunta = firebase.database()
 
 		qtd_pergunta = {
-		"Quantidade_Perguntas": new_pergunta_id
+			"Quantidade_Perguntas": new_pergunta_id
 		}
 
+		# Pega o valor de quantas perguntas o user ja enviou
+		db_user_qtd_perguntas = firebase.database()
+		user_qtd_perguntas = db_user_qtd_perguntas.child("Users").child(current_user_id).child("Questions").child("Quantidade_enviadas").get().val()
+
+		# Cria o id pra pergunta que o user vai enviar
+		new_user_pergunta_id = int(user_qtd_perguntas) + 1
+
+		# Faz conexao com banco de dados
+		db_write_user = firebase.database()
+		new_user_pergunta = db_write_user.child("Users").child(current_user_id).child("Questions")
+
+		new_user_pergunta = {
+			new_user_pergunta_id:new_pergunta_id,
+			"Quantidade_enviadas":new_user_pergunta_id
+		}
 
 		db_new_pergunta.update(new_pergunta)
+
 		db_qtd_pergunta.update(qtd_pergunta)
+		db_write_user.update(new_user_pergunta)
 
+		stdscr.clear()
 		stdscr.refresh()
-		
-
- 
-
 
 #curses.wrapper(adiciona_pergunta)
 def escreve_respostas(stdscr):

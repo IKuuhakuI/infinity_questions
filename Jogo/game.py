@@ -70,10 +70,8 @@ def show_game_menu(stdscr, current_user):
                 stdscr.clear()
                 play.final_game(stdscr)
 
-
-
             elif current_row_idx == 1:
-                 menuPerguntas.show_perguntas_menu(stdscr, current_user)
+                 menuPerguntas.show_perguntas_menu(stdscr, current_user_data, current_user)
 
             elif current_row_idx == 2:
                 screen.show_scoreboard(stdscr)
