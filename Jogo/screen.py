@@ -1,3 +1,4 @@
+import os
 import sys
 
 import curses
@@ -6,8 +7,11 @@ import actions
 import menu
 import scoreboard
 
-def resize_screen():
+def resize_screen_linux():
     sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=135))
+
+def resize_screen_windows():
+	os.system('mode con: cols=135 lines=40')
 
 # Tela inicial
 def show_title_screen(stdscr):
@@ -103,18 +107,23 @@ def show_deseja_sair(stdscr):
 	selected_row_idx = 0
 	stdscr.refresh()
 	menu.horizontal_menu(stdscr, selected_row_idx, botao)
+	
 	while True:
 		key = stdscr.getch()
 		stdscr.refresh()
 		if actions.keyboard(key) == 'left' and selected_row_idx > 0:
 			selected_row_idx -= 1
+
 		elif actions.keyboard(key) == 'right' and selected_row_idx < 1:
 			selected_row_idx += 1
+
 		elif actions.keyboard(key) == 'enter':
 			if selected_row_idx == 0: 
 				return True
-			elif selected_row_idx == 1: 
+
+			elif selected_row_idx == 1:
 				return False
+		
 		stdscr.clear()
 		textPrint.print_title(stdscr)
 		textPrint.print_center(stdscr, 'Tem certeza que deseja sair?')

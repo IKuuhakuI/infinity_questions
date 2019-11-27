@@ -1,16 +1,25 @@
-import pyrebase
 import curses
+import os
+import pyrebase
 
-import menu
+import actions
 import login
+import menu
 import registrar
 import scoreboard
-import textPrint
 import screen
-import actions
+import textPrint
+
 
 def start_screen():
-    screen.resize_screen()
+    # Windows 
+    if os.name == "nt":
+        
+        screen.resize_screen_windows()
+    # Linux
+    else:
+        screen.resize_screen_linux()
+
     input("Aperte qualquer coisa para abrir o jogo...")
     curses.wrapper(main)
 
@@ -61,7 +70,7 @@ def main(stdscr):
 
                 # Confirmar se deseja mesmo sair     
                 saiu = screen.show_deseja_sair(stdscr)      
-                screen.show_deseja_sair(stdscr)
+
                 stdscr.clear()
                 textPrint.print_title(stdscr)
                 
@@ -71,6 +80,7 @@ def main(stdscr):
                     textPrint.print_center(stdscr, message)
                     textPrint.print_title(stdscr)
                     stdscr.refresh()
+                    stdscr.getch()
                     break
 
             # Caso selecione a opcao de login  
