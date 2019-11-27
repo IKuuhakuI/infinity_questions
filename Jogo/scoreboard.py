@@ -77,32 +77,44 @@ def update_scoreboard(top_5_list, current_score, current_user_name):
     fourth_score, fourth_name = top_5_list[3][1], top_5_list[3][0]
     fifth_score, fifth_name = top_5_list[4][1], top_5_list[4][0]
 
+    update = None
+
     # Caso fique em primeiro
     if current_score > first_score:
         new_top_5_list = [current_user_name, first_name, second_name, third_name, fourth_name]
         new_top_5_score_list = [current_score, first_score, second_score, third_score, fourth_score]
+
+        update = "First"
 
     # Caso fique em segundo
     elif current_score > second_score:
         new_top_5_list = [first_name, current_user_name, second_name, third_name, fourth_name]
         new_top_5_score_list = [first_score, current_score, second_score, third_score, fourth_score]
 
+        update = "Second"
+
     # Caso fique em terceiro
     elif current_score > third_score:
         new_top_5_list = [first_name, second_name, current_user_name, third_name, fourth_name]
         new_top_5_score_list = [first_score, second_score, current_score, third_score, fourth_score]
+
+        update = "Third"
 
     # Caso fique em quarto
     elif current_score > fourth_score:
         new_top_5_list = [first_name, second_name, third_name, current_user_name, fourth_name]
         new_top_5_score_list = [first_score, second_score, third_score, current_score, fourth_score]
 
-    elif current_score > fifth_name:
+        update = "Fourth"
+
+    elif current_score > fifth_score:
         new_top_5_list = [first_name, second_name, third_name, fourth_name, current_user_name]
         new_top_5_score_list = [first_score, second_score, third_score, fourth_score, current_score]
     
+        update = "Fifth"
+
     else:
-        return None
+        return update
 
     db_scoreboard = firebase.database()
 
@@ -133,6 +145,33 @@ def update_scoreboard(top_5_list, current_score, current_user_name):
 
     db_scoreboard.update(new_scoreboard)
 
-    #for idx in range(5):
-    #   this_score = new_top_5_score_list[idx] 
-    #   this_name = new_top_5_list[idx]
+    return update
+
+def set_user_high_score(current_score, current_high_score, current_user_id):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    # Conexao com o Firebase
+    firebase = pyrebase.initialize_app(config)
+
+    if current_score > current_high_score:
+        db_user_high_score = firebase.database()
+
+        new_user_high_score = db_user_high_score.child("Users").child(current_user_id)
+
+        new_user_high_score = {
+            "Highscore":current_score
+        }  
+
+        db_user_high_score.update(new_user_high_score)
+
+        return True
+
+    return False
