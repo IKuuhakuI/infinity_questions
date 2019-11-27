@@ -111,7 +111,10 @@ def show_deseja_sair(stdscr):
 		elif actions.keyboard(key) == 'right' and selected_row_idx < 1:
 			selected_row_idx += 1
 		elif actions.keyboard(key) == 'enter':
-			break
+			if selected_row_idx == 0: 
+				return True
+			elif selected_row_idx == 1: 
+				return False
 		stdscr.clear()
 		textPrint.print_title(stdscr)
 		textPrint.print_center(stdscr, 'Tem certeza que deseja sair?')

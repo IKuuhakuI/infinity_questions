@@ -37,6 +37,8 @@ def main(stdscr):
 
     textPrint.print_title(stdscr)
 
+    selected_row_idx = 0
+
     while True:
         # Recebe a entrada do teclado
         key = stdscr.getch()
@@ -56,16 +58,20 @@ def main(stdscr):
             
             # Caso selecione a opcao de sair
             if current_row_idx == len(menu_login) - 1:
-                # Mensagem ao sair
-                message = "Obrigado por jogar. Aperte qualquer coisa para sair"
-                textPrint.print_center(stdscr, message)
+
+                # Confirmar se deseja mesmo sair     
+                saiu = screen.show_deseja_sair(stdscr)      
+                screen.show_deseja_sair(stdscr)
+                stdscr.clear()
                 textPrint.print_title(stdscr)
-                stdscr.refresh()
-
-                # Espera o user digitar algo pra sair
-                stdscr.getch()
-
-                break
+                
+                if saiu == True:
+                    # Mensagem de agradecimento por ter entrado no jogo
+                    message = "Obrigado por jogar. Aperte qualquer coisa para sair"
+                    textPrint.print_center(stdscr, message)
+                    textPrint.print_title(stdscr)
+                    stdscr.refresh()
+                    break
 
             # Caso selecione a opcao de login  
             elif current_row_idx == 0:
