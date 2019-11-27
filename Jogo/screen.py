@@ -118,10 +118,10 @@ def show_deseja_sair(stdscr):
 			selected_row_idx += 1
 
 		elif actions.keyboard(key) == 'enter':
-			if selected_row_idx == 0: 
+			if selected_row_idx == 0: #SIM
 				return True
 
-			elif selected_row_idx == 1:
+			elif selected_row_idx == 1: #NAO
 				return False
 		
 		stdscr.clear()

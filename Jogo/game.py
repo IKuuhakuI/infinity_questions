@@ -64,7 +64,16 @@ def show_game_menu(stdscr, current_user):
             textPrint.print_center(stdscr, 'enter')
 
             if current_row_idx == len(menu_jogo) - 1:
-                break
+
+                # Confirmar se deseja mesmo sair     
+                saiu = screen.show_deseja_sair(stdscr)      
+                
+                if saiu == True:
+                    # Voltar para primeiro menu
+                    stdscr.clear()
+                    menu.print_menu
+                    stdscr.refresh()
+                    break
 
             elif current_row_idx == 0:
                 stdscr.clear()
