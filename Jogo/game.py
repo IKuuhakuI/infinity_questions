@@ -68,7 +68,7 @@ def show_game_menu(stdscr, current_user):
 
             elif current_row_idx == 0:
                 stdscr.clear()
-                play.final_game(stdscr)
+                play.final_game(stdscr, current_user_name, current_user)
 
             elif current_row_idx == 1:
                  menuPerguntas.show_perguntas_menu(stdscr, current_user_data, current_user)

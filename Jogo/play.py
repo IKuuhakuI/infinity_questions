@@ -4,11 +4,12 @@
 import curses
 
 import actions
-import screen
-import textPrint 
 import getData
+import screen
+import scoreboard
+import textPrint 
 
-def final_game(stdscr):
+def final_game(stdscr, current_user_name, current_user_id):
     # A, B, C, D, G, a, b, c, d, g
     caracteres_permitidos = [65,66,67,68,71,97,98,99,100,103]
 
@@ -38,6 +39,7 @@ def final_game(stdscr):
 
     hasGivenUp = False
     hasLost = False
+    hasWon = False
 
     pontos = 0
 
@@ -96,6 +98,7 @@ def final_game(stdscr):
                     textPrint.print_title(stdscr)
                     stdscr.getch()
                     stdscr.clear()
+
                     break
 
                 else:
@@ -115,7 +118,16 @@ def final_game(stdscr):
         if hasGivenUp == True or hasLost == True:
             break
 
+    # Alterar scoreboard e recorde pessoal
+    top_5_list = scoreboard.get_top_5_high_score()
+
+    scoreboard.update_scoreboard(top_5_list, pontos, current_user_name)
+
+    # Texto com a pontuacao feita pelo jogador
+    pontuacao_final = "Pontuacao final: " + str(pontos)
+
+    stdscr.getch()
+
     stdscr.clear()
-    textPrint.print_center(stdscr, "Pontuacao final = " + str(pontos))
     textPrint.print_title(stdscr)
     stdscr.getch()
