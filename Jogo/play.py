@@ -9,7 +9,7 @@ import screen
 import scoreboard
 import textPrint 
 
-def final_game(stdscr, current_user_name, current_user_id):
+def final_game(stdscr, current_user_name, current_user_id, current_user_high_score):
     # A, B, C, D, G, a, b, c, d, g
     caracteres_permitidos = [65,66,67,68,71,97,98,99,100,103]
 
@@ -121,13 +121,13 @@ def final_game(stdscr, current_user_name, current_user_id):
     # Alterar scoreboard e recorde pessoal
     top_5_list = scoreboard.get_top_5_high_score()
 
-    scoreboard.update_scoreboard(top_5_list, pontos, current_user_name)
+    globalRecord = scoreboard.update_scoreboard(top_5_list, pontos, current_user_name)
+    personalRecord = scoreboard.set_user_high_score(pontos, current_user_high_score, current_user_id)
 
     # Texto com a pontuacao feita pelo jogador
     pontuacao_final = "Pontuacao final: " + str(pontos)
 
-    stdscr.getch()
-
     stdscr.clear()
+    textPrint.print_center(stdscr, pontuacao_final)
     textPrint.print_title(stdscr)
     stdscr.getch()
