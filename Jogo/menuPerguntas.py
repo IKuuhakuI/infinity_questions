@@ -193,10 +193,13 @@ def show_all_questions(stdscr, current_user_id, mode):
     pages = perguntasActions.get_questions_pages(text_questions_ids)
     quantidade_paginas = len(pages)
 
+    text = ["Pagina " + str(current_page_index + 1)]
+
     while True:
         current_page = pages[current_page_index]
         page_with_numbers = perguntasActions.add_question_number_on_page(current_page)
 
+        textPrint.print_multi_bottom_lines(stdscr, text, len(text))
         textPrint.print_multi_lines(stdscr, page_with_numbers, len(page_with_numbers))
         textPrint.print_title(stdscr)
         stdscr.refresh()
@@ -208,11 +211,19 @@ def show_all_questions(stdscr, current_user_id, mode):
 
         elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
             current_page_index += 1
+            text = ["Pagina " + str(current_page_index + 1)]
+            stdscr.clear()
 
         elif actions.verify_back(key) == True and current_page_index > 0:
             current_page_index -= 1
+            text = ["Pagina " + str(current_page_index + 1)]
+            stdscr.clear()
 
-        stdscr.clear()
+        elif actions.verify_which_question(key) == -1:
+            stdscr.clear()
+            text = ["Pagina " + str(current_page_index + 1),"Entrada Invalida"]
+            
+            
 
 def test(stdscr):
     show_all_questions(stdscr, 1, 0)

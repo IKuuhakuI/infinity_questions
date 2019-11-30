@@ -532,6 +532,7 @@ def get_questions_ids(questions):
 
     return questions_ids
 
+########## RETORNA OS IDS DAS PERGUNTAS RECEBIDAS ORDENADAS DE 1 A 8 #####
 def add_question_number_on_page(current_page):
     tamanho = len(current_page)
 
