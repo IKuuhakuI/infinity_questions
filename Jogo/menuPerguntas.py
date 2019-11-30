@@ -163,17 +163,42 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
 
             # Opcao Alterar Pergunta
             elif current_row_idx == 1:
-                escolha = show_all_questions(stdscr, current_user, "Editar")
+                current_row_idx = 0
 
-                if escolha == -1:
-                    stdscr.clear()
-                    textPrint.print_center(stdscr, "Usuario ainda nao enviou perguntas")
+                while True:
+                    screen.show_questions_rules_screen(stdscr,current_row_idx)
 
-                    stdscr.getch()
+                    # Entrada do teclado
+                    key = stdscr.getch()
 
-                elif escolha != -2:
-                    stdscr.clear()
-                    perguntasActions.escreve_pergunta(stdscr, current_user, current_user_data, "Editar", escolha)
+                    # Navegar pelo menu
+                    if actions.keyboard(key) == 'left' and current_row_idx > 0:
+                        current_row_idx -= 1
+                    elif actions.keyboard(key) == 'right' and current_row_idx < 1:
+                        current_row_idx += 1
+
+                    # Caso selecione uma opcao
+                    elif actions.keyboard(key) == 'enter':
+                        # Caso selecione continuar
+                        if current_row_idx == 0:
+                            stdscr.clear()
+
+                            escolha = show_all_questions(stdscr, current_user, "Editar")
+
+                            if escolha == -1:
+                                stdscr.clear()
+                                textPrint.print_center(stdscr, "Usuario ainda nao enviou perguntas")
+
+                                stdscr.getch()
+
+                            elif escolha != -2:
+                                stdscr.clear()
+                                perguntasActions.escreve_pergunta(stdscr, current_user, current_user_data, "Editar", escolha)
+
+                        # Caso selecione voltar
+                        else:
+                            break
+                
         
         stdscr.refresh()
 
