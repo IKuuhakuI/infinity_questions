@@ -147,7 +147,6 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode, question_
             stdscr.clear()
             desistencia_da_resposta = 0
 
-############################################################
             # Chama funcao que pergunta sobre as respostas
             desistencia_da_resposta = escreve_respostas(stdscr, question_id, mode)
 
@@ -408,7 +407,12 @@ def escreve_respostas(stdscr, question_id, mode):
             stdscr.clear()
 
             textPrint.print_title(stdscr)
-            sucess_message = ["Pergunta adicionada com sucesso", "Pressione qualquer tecla para continuar"]
+
+            if mode == "Adicionar":
+                sucess_message = ["Pergunta adicionada com sucesso", "Pressione qualquer tecla para continuar"]
+            
+            else:
+                sucess_message = ["Pergunta editada com sucesso", "Pressione qualquer tecla para continuar"]
             textPrint.print_multi_lines(stdscr,sucess_message, 2)
             
             stdscr.refresh()
