@@ -151,7 +151,6 @@ def show_editar_perguntas_menu(stdscr, current_user):
             stdscr.clear()
             textPrint.print_center(stdscr, 'enter')
 
-
 			# Opcao Voltar:            
             if current_row_idx == len(menu_editar_perguntas) - 1:
                 break
@@ -164,8 +163,14 @@ def show_editar_perguntas_menu(stdscr, current_user):
 
             # Opcao Alterar Pergunta
             elif current_row_idx == 1:
-                show_all_questions(stdscr, current_user, "Editar")
+                escolha = show_all_questions(stdscr, current_user, "Editar")
 
+                if escolha == -1:
+                    stdscr.clear()
+                    textPrint.print_center(stdscr, "Usuario ainda nao enviou perguntas")
+
+                    stdscr.getch()
+                    
             stdscr.refresh()
 
         # Imprime o titulo do jogo
@@ -178,6 +183,8 @@ def show_editar_perguntas_menu(stdscr, current_user):
 
         textPrint.print_title(stdscr)
 
+
+########### MOSTRA AS PERGUNTAS FEITAS PELO USER ###########
 def show_all_questions(stdscr, current_user_id, mode):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
@@ -218,7 +225,7 @@ def show_all_questions(stdscr, current_user_id, mode):
         key = stdscr.getch()
 
         if actions.verify_exit(key) == True:
-            return -1
+            return -2
 
         elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
             current_page_index += 1
