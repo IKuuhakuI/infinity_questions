@@ -92,7 +92,8 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode, question_
 
         if mode == "Editar":
             question_text = getData.get_one_question_data(question_id)
-            textPrint.print_center(stdscr, "Pergunta atual: " + question_text)
+            pergunta_atual_label = ["Pergunta atual: " + question_text, ""]
+            textPrint.print_multi_lines(stdscr,pergunta_atual_label, 2)
             pergunta_label = "Pergunta editada: "
 
         else:
