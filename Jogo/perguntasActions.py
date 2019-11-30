@@ -10,43 +10,18 @@ import pyrebase
 import actions
 import getData
 import menu
+import screen
 import textPrint
 
 ############### ADICIONAR PERGUNTAS ################################
 def adiciona_pergunta(stdscr, current_user_id, current_user_data):
-    continuar_voltar_menu = ('Continuar', 'Voltar')
-
-    stdscr.clear()
-
-    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
-
-    stdscr.attron(curses.color_pair(1))
-
-    linha1 = "Ok! Antes de comecar a adicionar/alterar uma pergunta, leia as regras atentamente!"
-    linha2 = "Regras: "
-    linha3 = "1 - Voce ira primeiro inserir uma pergunta"
-    linha4 = "2 - Apos isso, voce devera informar 4 possiveis respostas"
-    linha5 = "3 - Das respostas, somente 1 podera ser a resposta correta"
-    linha6 = "4 - Caso voce informe mais de 1 resposta correta, o programa ira recusar"
-    regras_para_adicionar = [linha1, linha2, linha3, linha4, linha5, linha6]
-
     current_row_idx = 0
 
-    while True:
-        textPrint.print_title(stdscr)
-        
-        # Imprime as regras no centro da tela
-        textPrint.print_multi_lines(stdscr, regras_para_adicionar, 6)
-        
-        # Menu de continuar / voltar
-        menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
-        
-        stdscr.refresh()
+    while True:   
+        screen.show_questions_rules_screen(stdscr, current_row_idx)
 
         # Entrada do teclado
         key = stdscr.getch()
-
 
         # Navegar pelo menu
         if actions.keyboard(key) == 'left' and current_row_idx > 0:
@@ -63,7 +38,6 @@ def adiciona_pergunta(stdscr, current_user_id, current_user_data):
                 # Funcao que adiciona perguntas no jogo
                 escreve_pergunta(stdscr, current_user_id, current_user_data)
                 
-                stdscr.clear()
                 stdscr.clear()
 
             # Caso selecione voltar
