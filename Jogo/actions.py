@@ -20,6 +20,14 @@ def verify_giveup(entrada):
         return True
     return False
 
+def verify_0_ou_1(entrada):
+    if entrada == "1":
+        return True
+    elif entrada == "0":    
+        return False
+    else:
+        return 'erro'
+
 def keyboard(entrada):
     if entrada == curses.KEY_UP:
         return 'up'

@@ -10,7 +10,7 @@ import textPrint
 import scoreboard
 import play
 import screen
-import adicionaPergunta
+import perguntasActions
 
 # funcao destinada ao menu Perguntas onde
 # as opcoes sao Adicionao Pergunta, Editar Pergunta e Retornar
@@ -75,7 +75,7 @@ def show_perguntas_menu(stdscr, current_user, current_user_id):
 
             # Opcao Adicionar Pergunta
             elif current_row_idx == 0:
-            	adicionaPergunta.adiciona_pergunta(stdscr, current_user_id, current_user_data)
+            	perguntasActions.adiciona_pergunta(stdscr, current_user_id, current_user_data)
                 
 
             # Opcao Editar Pergunta
