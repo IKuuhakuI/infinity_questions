@@ -87,6 +87,26 @@ def get_user_questions_data(user_id):
 
     return question_list
 
+######## PEGA 1 PERGUNTA SOMENTE #########################
+def get_one_question_data(question_id):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    firebase = pyrebase.initialize_app(config)
+
+    db_question = firebase.database()
+
+    question_text = db_question.child("Perguntas").child(question_id).child("Pergunta").get().val()
+
+    return str(question_text)    
+
 ######### PEGA A RESPOSTA CERTA DE UMA PERGUNTA #######  
 def get_right_answer(dict_respostas):
     if dict_respostas['a']['isCorrect'] == True:
