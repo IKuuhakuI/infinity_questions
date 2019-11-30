@@ -8,6 +8,7 @@ import pyrebase
 # Arquivos de funcoes criadas 
 import actions
 import getData
+import math
 import menu
 import screen
 import textPrint
@@ -495,3 +496,25 @@ def escreve_respostas(stdscr):
 
     else:
         return False
+
+########## ORDENA PERGUNTAS PARA SEREM MOSTRADAS DE 8 EM 8 ############
+def get_questions_pages(questions):
+    tamanho = len(questions)
+
+    quantidade_paginas = math.ceil(tamanho/8)
+    lista_perguntas = [0] * quantidade_paginas
+
+    for pagina_atual in range(quantidade_paginas):
+        this_page = []
+
+        for in_page_question in range(8):
+            this_question = pagina_atual*8 + in_page_question
+
+            this_page.append(questions[this_question])
+
+            if this_question == tamanho - 1:
+                break
+
+        lista_perguntas[pagina_atual] = this_page
+
+    return lista_perguntas
