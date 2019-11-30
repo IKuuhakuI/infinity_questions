@@ -193,7 +193,7 @@ def show_all_questions(stdscr, current_user_id, mode):
     pages = perguntasActions.get_questions_pages(text_questions_ids)
     quantidade_paginas = len(pages)
 
-    text = ["Pagina " + str(current_page_index + 1)]
+    text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
 
     while True:
         current_page = pages[current_page_index]
@@ -211,20 +211,25 @@ def show_all_questions(stdscr, current_user_id, mode):
 
         elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
             current_page_index += 1
-            text = ["Pagina " + str(current_page_index + 1)]
+            
+            text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+
             stdscr.clear()
 
         elif actions.verify_back(key) == True and current_page_index > 0:
             current_page_index -= 1
-            text = ["Pagina " + str(current_page_index + 1)]
+            
+            text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+            
             stdscr.clear()
 
-        elif actions.verify_which_question(key) == -1:
-            stdscr.clear()
-            text = ["Pagina " + str(current_page_index + 1),"Entrada Invalida"]
-            
-            
+        elif actions.verify_which_question(key) != -1:
+            pass
 
+        else:
+            stdscr.clear()
+            text = ["Entrada Invalida", "Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+            
 def test(stdscr):
     show_all_questions(stdscr, 1, 0)
 
