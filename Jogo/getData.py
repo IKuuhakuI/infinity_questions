@@ -1,6 +1,7 @@
 import pyrebase
 import random
 
+######### PEGA OS DADOS DO USER ##############################
 def get_user_data(user_id):
     # Configuracoes do banco de dados
 
@@ -20,12 +21,16 @@ def get_user_data(user_id):
 
     current_user_data = db_current_user_data.child("Users").child(user_id).get().val()
 
+    print(current_user_data)
+
     return current_user_data.copy()
 
+########## COLOCA PERGUNTAS EM ORDEM ALEATORIA ############
 def random_questions(question_list):
     random.shuffle(question_list)
     return question_list
 
+########## CRIA UMA LISTA DE PERGUNTAS ####################
 def create_question_list(question_list):
     final_list = []
     for idx in range(len(question_list)):
@@ -35,6 +40,7 @@ def create_question_list(question_list):
 
     return final_list
 
+######### PEGA TODAS AS PERGUNTAS DO JOGO ################
 def get_questions_data():
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
@@ -61,6 +67,27 @@ def get_questions_data():
 
     return final_list
 
+######### PEGA PERGUNTAS ENVIADAS PELO USER #############
+def get_user_questions_data(user_id):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    firebase = pyrebase.initialize_app(config)
+
+    db_user_questions = firebase.database()
+
+    question_list = db_user_questions.child("Users").child(user_id).child("Questions").get().val()
+
+    return question_list
+
+######### PEGA A RESPOSTA CERTA DE UMA PERGUNTA #######  
 def get_right_answer(dict_respostas):
     if dict_respostas['a']['isCorrect'] == True:
         return [65,97]
@@ -73,6 +100,7 @@ def get_right_answer(dict_respostas):
 
     return [68,100]
 
+######## PEGA AS RESPOSTAS DE UMA PERGUNTA ESPECIFICA ###
 def get_answer(id):
     config = {
         "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
