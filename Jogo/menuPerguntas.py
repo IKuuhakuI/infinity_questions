@@ -242,15 +242,15 @@ def show_all_questions(stdscr, current_user_id, mode):
             stdscr.clear()
             text = ["Entrada Invalida", "Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
             
-def test(stdscr):
-    while True:
-        a = show_all_questions(stdscr, 1, 0)
-        stdscr.clear()
-        textPrint.print_center(stdscr, str(a))
-        stdscr.refresh()
-        stdscr.getch()
+#def test(stdscr):
+#    while True:
+#        a = show_all_questions(stdscr, 1, 0)
+#        stdscr.clear()
+#        textPrint.print_center(stdscr, str(a))
+#        stdscr.refresh()
+#        stdscr.getch()
 
-        if a == -1:
-            break
+#        if a == -1:
+#            break
 
-curses.wrapper(test)
+#curses.wrapper(test)
