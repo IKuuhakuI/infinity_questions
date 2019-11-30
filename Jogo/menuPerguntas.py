@@ -199,6 +199,7 @@ def show_all_questions(stdscr, current_user_id, mode):
 
     questions = perguntasActions.get_question_list(questions_ids)
 
+    pages_id = perguntasActions.get_questions_pages(questions_ids)
     pages = perguntasActions.get_questions_pages(questions)
     quantidade_paginas = len(pages)
 
@@ -218,7 +219,7 @@ def show_all_questions(stdscr, current_user_id, mode):
         key = stdscr.getch()
 
         if actions.verify_exit(key) == True:
-            break
+            return -1
 
         elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
             current_page_index += 1
@@ -234,14 +235,22 @@ def show_all_questions(stdscr, current_user_id, mode):
             
             stdscr.clear()
 
-        elif actions.verify_which_question(key) != -1:
-            pass
+        elif actions.verify_which_question(key) != -1 and actions.verify_which_question(key) < len(current_page) + 1:
+            return pages_id[current_page_index][actions.verify_which_question(key)-1]
 
         else:
             stdscr.clear()
             text = ["Entrada Invalida", "Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
             
 def test(stdscr):
-    show_all_questions(stdscr, 1, 0)
+    while True:
+        a = show_all_questions(stdscr, 1, 0)
+        stdscr.clear()
+        textPrint.print_center(stdscr, str(a))
+        stdscr.refresh()
+        stdscr.getch()
+
+        if a == -1:
+            break
 
 curses.wrapper(test)
