@@ -526,11 +526,24 @@ def get_questions_ids(questions):
     questions_ids = []
 
     for pergunta_atual in range(1, quantidade_perguntas):
-        text_pegunta_atual = str(questions[str(pergunta_atual)])
+        id_atual = str(questions[str(pergunta_atual)])
 
-        questions_ids.append(text_pegunta_atual)
+        questions_ids.append(id_atual)
 
     return questions_ids
+
+########### PEGA O TEXTO DAS PERGUNTAS ############################
+def get_question_list(questions_ids):
+    question_list = []
+
+    quantidade = len(questions_ids)
+
+    for pergunta_atual in range(quantidade):
+        this_question = getData.get_one_question_data(questions_ids[pergunta_atual])
+
+        question_list.append(this_question)
+
+    return(question_list)
 
 ########## RETORNA OS IDS DAS PERGUNTAS RECEBIDAS ORDENADAS DE 1 A 8 #####
 def add_question_number_on_page(current_page):

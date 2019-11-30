@@ -186,14 +186,21 @@ def show_all_questions(stdscr, current_user_id, mode):
     
     current_page_index = 0
 
-    questions = getData.get_user_questions_data(current_user_id)
+    textPrint.print_center(stdscr, "Carregando...")
+    stdscr.refresh()
 
-    text_questions_ids = perguntasActions.get_questions_ids(questions)
+    questions_data = getData.get_user_questions_data(current_user_id)
 
-    pages = perguntasActions.get_questions_pages(text_questions_ids)
+    questions_ids = perguntasActions.get_questions_ids(questions_data)
+
+    questions = perguntasActions.get_question_list(questions_ids)
+
+    pages = perguntasActions.get_questions_pages(questions)
     quantidade_paginas = len(pages)
 
     text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+
+    stdscr.clear()
 
     while True:
         current_page = pages[current_page_index]
