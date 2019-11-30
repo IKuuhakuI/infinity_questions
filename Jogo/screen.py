@@ -1,19 +1,20 @@
 import os
 import sys
 
-import curses
-import textPrint
 import actions
+import curses
 import menu
 import scoreboard
+import textPrint
 
+######### REDIMENSIONA A TELA PARA LINUX ##################
 def resize_screen_linux():
     sys.stdout.write("\x1b[8;{rows};{cols}t".format(rows=40, cols=135))
 
 def resize_screen_windows():
 	os.system('mode con: cols=135 lines=40')
 
-# Tela inicial
+######### REDIMENSIONA A TELA PARA WINDOWS ##################
 def show_title_screen(stdscr):
 	lista_textos_iniciais = ['Infinity Questions', 'Aperte enter para continuar']
 	linhas = 2
@@ -24,21 +25,21 @@ def show_title_screen(stdscr):
 		if actions.keyboard(key) == 'enter':
 			break
 
-# Tela que vem logo apos o usuario clicar em 'jogar'
+######### TELA DE BEM VINDO ################################
 def show_welcome_screen(stdscr):
 	lista_texto_rules = ['Bem Vindo ao Infinity Questions!','O objetivo é ver quem consegue acertar o maximo de perguntas sem errar!','Você acha que consegue quebrar o recorde?','Para continuar, aperte qualquer coisa...']
 	linhas = 4
 	textPrint.print_multi_lines(stdscr, lista_texto_rules, linhas)
 	stdscr.getch()
 
-# Tela que mostra as regras antes do usuario comecar a jogar
+######### REGRAS DO JOGO #########################################
 def show_rules_screen(stdscr):
 	lista_texto_regras = ['Regras:', '1- Responda somente com (a), (b), (c) ou (d)', '2- Caso nao saiba responder e queira desistir, digite (g)', '3- Caso erre a resposta, o jogo acaba e voce nao ganha nenhum ponto', '4- Caso ganhe ou desista, a quatidade de pontos vai ser quantas peguntas voce acertou', 'Para continuar aperte qualuqer coisa...']
 	linhas = 6
 	textPrint.print_multi_lines(stdscr, lista_texto_regras, linhas)
 	stdscr.getch()
 
-# Tela que mostra regras de adicionar perguntas
+######### REGRAS PARA ADICIONAR/EDITAR PERGUNTAS ##################
 def show_questions_rules_screen(stdscr, current_row_idx):
 	continuar_voltar_menu = ('Continuar', 'Voltar')
 
@@ -53,14 +54,17 @@ def show_questions_rules_screen(stdscr, current_row_idx):
 
 	linha1 = "Ok! Antes de comecar a adicionar/alterar uma pergunta, leia as regras atentamente!"
 	linha2 = "Regras: "
-	linha3 = "1 - Voce ira primeiro inserir uma pergunta"
-	linha4 = "2 - Apos isso, voce devera informar 4 possiveis respostas"
-	linha5 = "3 - Das respostas, somente 1 podera ser a resposta correta"
-	linha6 = "4 - Caso voce informe mais de 1 resposta correta, o programa ira recusar"
-	regras_para_adicionar = [linha1, linha2, linha3, linha4, linha5, linha6]
+	
+	linha3 = "1 - Ao editar uma pergunta, voce deve informar o numero dela"
+	linha4 = "2 - Em seguida, voce ira informar a nova pergunta"
+	linha5 = "3 - Apos isso, voce devera informar 4 possiveis respostas"
+	linha6 = "4 - Das respostas, somente 1 podera ser a resposta correta"
+	linha7 = "5 - Caso voce informe mais de 1 resposta correta, o programa ira recusar"
+
+	regras_para_adicionar = [linha1, linha2, linha3, linha4, linha5, linha6, linha7]
 
 	# Imprime as regras no centro da tela
-	textPrint.print_multi_lines(stdscr, regras_para_adicionar, 6)
+	textPrint.print_multi_lines(stdscr, regras_para_adicionar, 7)
         
 	# Menu de continuar / voltar
 	menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
