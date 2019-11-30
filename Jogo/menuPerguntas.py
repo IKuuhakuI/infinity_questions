@@ -191,6 +191,10 @@ def show_all_questions(stdscr, current_user_id, mode):
 
     questions_data = getData.get_user_questions_data(current_user_id)
 
+    # Caso user nao tenha enviado perguntas
+    if len(questions_data) == 1:
+        return -1
+
     questions_ids = perguntasActions.get_questions_ids(questions_data)
 
     questions = perguntasActions.get_question_list(questions_ids)
@@ -198,7 +202,7 @@ def show_all_questions(stdscr, current_user_id, mode):
     pages = perguntasActions.get_questions_pages(questions)
     quantidade_paginas = len(pages)
 
-    text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+    text = ["Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
 
     stdscr.clear()
 
@@ -219,14 +223,14 @@ def show_all_questions(stdscr, current_user_id, mode):
         elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
             current_page_index += 1
             
-            text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+            text = ["Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
 
             stdscr.clear()
 
         elif actions.verify_back(key) == True and current_page_index > 0:
             current_page_index -= 1
             
-            text = ["Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+            text = ["Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
             
             stdscr.clear()
 
@@ -235,7 +239,7 @@ def show_all_questions(stdscr, current_user_id, mode):
 
         else:
             stdscr.clear()
-            text = ["Entrada Invalida", "Pagina " + str(current_page_index + 1), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
+            text = ["Entrada Invalida", "Pagina " + str(current_page_index + 1) + " / " + str(quantidade_paginas), "Para passar a pagina digite 'n'", "Para voltar a pagina, digite 'b'", "Para sair, digite 'e'"]
             
 def test(stdscr):
     show_all_questions(stdscr, 1, 0)
