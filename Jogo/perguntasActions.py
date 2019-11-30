@@ -518,3 +518,14 @@ def get_questions_pages(questions):
         lista_perguntas[pagina_atual] = this_page
 
     return lista_perguntas
+
+########## RETORNA OS IDS DAS PERGUNTAS DOS USERS ###################
+def get_questions_values(questions):
+    quantidade_perguntas = len(questions)
+
+    questions_ids = []
+
+    for pergunta_atual in range(1, quantidade_perguntas):
+        questions_ids.append(questions[str(pergunta_atual)])
+
+    return questions_ids
