@@ -36,39 +36,7 @@ def adiciona_pergunta(stdscr, current_user_id, current_user_data):
                 stdscr.clear()
 
                 # Funcao que adiciona perguntas no jogo
-                escreve_pergunta(stdscr, current_user_id, current_user_data, "Adicionar")
-                
-                stdscr.clear()
-
-            # Caso selecione voltar
-            else:
-                break
-
-################### EDITAR PERGUNTAS #########################
-
-def editar_pergunta():
-    current_row_idx = 0
-
-    while True:   
-        screen.show_questions_rules_screen(stdscr, current_row_idx)
-
-        # Entrada do teclado
-        key = stdscr.getch()
-
-        # Navegar pelo menu
-        if actions.keyboard(key) == 'left' and current_row_idx > 0:
-            current_row_idx -= 1
-        elif actions.keyboard(key) == 'right' and current_row_idx < 1:
-            current_row_idx += 1
-
-        # Caso selecione uma opcao
-        elif actions.keyboard(key) == 'enter':
-            # Caso selecione continuar
-            if current_row_idx == 0:
-                stdscr.clear()
-
-                # Funcao que adiciona perguntas no jogo
-                #escreve_pergunta(stdscr, current_user_id, current_user_data, "Editar")
+                escreve_pergunta(stdscr, current_user_id, current_user_data, "Adicionar", -1)
                 
                 stdscr.clear()
 
@@ -79,7 +47,7 @@ def editar_pergunta():
 ################### USER INFORMA A PERGUNTA #################
 
 # Entada: interface grafica, id do user, dados do user. modo (Adicionar/ Editar)
-def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
+def escreve_pergunta(stdscr, current_user_id, current_user_data, mode, question_id):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
@@ -122,7 +90,13 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
         # Habilita visualizacao do cursor
         curses.curs_set(True)
 
-        pergunta_label = "Informe a pergunta: "
+        if mode == "Editar":
+            question_text = getData.get_one_question_data(question_id)
+            textPrint.print_center(stdscr, "Pergunta atual: " + question_text)
+            pergunta_label = "Pergunta editada: "
+
+        else:
+            pergunta_label = "Informe a pergunta: "
 
         # Coordenadas da area para escrever a pergunta
         x_pergunta = largura_tela//2 - 50 - len(pergunta_label)//2
@@ -172,8 +146,9 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
             stdscr.clear()
             desistencia_da_resposta = 0
 
+############################################################
             # Chama funcao que pergunta sobre as respostas
-            desistencia_da_resposta = escreve_respostas(stdscr)
+            desistencia_da_resposta = escreve_respostas(stdscr, question_id, mode)
 
             break
         
@@ -218,7 +193,11 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
     
     # Escreve os dados obtidos no banco de dados
     if exitRegister == False and desistencia_da_resposta != False:
-        new_pergunta_id = quantidade_perguntas + 1
+        if mode == "Adicionar":
+            new_pergunta_id = quantidade_perguntas + 1
+        else:
+            new_pergunta_id = question_id
+
         db_new_pergunta = firebase.database()
         new_pergunta = db_new_pergunta.child("Perguntas").child(new_pergunta_id)
 
@@ -226,38 +205,39 @@ def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
             "Pergunta": user_pergunta
         }
 
-        db_qtd_pergunta = firebase.database()
-
-        qtd_pergunta = {
-            "Quantidade_Perguntas": new_pergunta_id
-        }
-
-        # Pega o valor de quantas perguntas o user ja enviou
-        db_user_qtd_perguntas = firebase.database()
-        user_qtd_perguntas = db_user_qtd_perguntas.child("Users").child(current_user_id).child("Questions").child("Quantidade_enviadas").get().val()
-
-        # Cria o id pra pergunta que o user vai enviar
-        new_user_pergunta_id = int(user_qtd_perguntas) + 1
-
-        # Faz conexao com banco de dados
-        db_write_user = firebase.database()
-        new_user_pergunta = db_write_user.child("Users").child(current_user_id).child("Questions")
-
-        new_user_pergunta = {
-            new_user_pergunta_id:new_pergunta_id,
-            "Quantidade_enviadas":new_user_pergunta_id
-        }
-
         db_new_pergunta.update(new_pergunta)
 
-        db_qtd_pergunta.update(qtd_pergunta)
-        db_write_user.update(new_user_pergunta)
+        if mode == "Adicionar":
+            db_qtd_pergunta = firebase.database()
+
+            qtd_pergunta = {
+                "Quantidade_Perguntas": new_pergunta_id
+            }
+
+            # Pega o valor de quantas perguntas o user ja enviou
+            db_user_qtd_perguntas = firebase.database()
+            user_qtd_perguntas = db_user_qtd_perguntas.child("Users").child(current_user_id).child("Questions").child("Quantidade_enviadas").get().val()
+
+            # Cria o id pra pergunta que o user vai enviar
+            new_user_pergunta_id = int(user_qtd_perguntas) + 1
+
+            # Faz conexao com banco de dados
+            db_write_user = firebase.database()
+            new_user_pergunta = db_write_user.child("Users").child(current_user_id).child("Questions")
+
+            new_user_pergunta = {
+                new_user_pergunta_id:new_pergunta_id,
+                "Quantidade_enviadas":new_user_pergunta_id
+            }
+
+            db_qtd_pergunta.update(qtd_pergunta)
+            db_write_user.update(new_user_pergunta)
 
         stdscr.clear()
         stdscr.refresh()
 
 ################### ESCREVER RESPOSTAS #######################
-def escreve_respostas(stdscr):
+def escreve_respostas(stdscr, question_id, mode):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
@@ -470,8 +450,13 @@ def escreve_respostas(stdscr):
         if exitRegister == True:
             break
     
-    if exitRegister == False:           
-        new_resposta_id = quantidade_resposta + 1
+    if exitRegister == False:   
+        if mode == "Editar":
+            new_resposta_id = question_id
+            
+        else:        
+            new_resposta_id = quantidade_resposta + 1
+            
         db_new_resposta = firebase.database()
         new_resposta = db_new_resposta.child("Respostas").child(new_resposta_id)
 
@@ -482,16 +467,17 @@ def escreve_respostas(stdscr):
         "d": {"isCorrect": user_trueFalseD, "valor": user_respostaD }
         }
 
-
-        db_qtd_resposta = firebase.database()
-
-        qtd_resposta = {
-            "Quantidade_Perguntas": new_resposta_id 
-        }
-
         db_new_resposta.update(new_resposta)
-        db_qtd_resposta.update(qtd_resposta)
 
+        if mode == "Adicionar":
+            db_qtd_resposta = firebase.database()
+
+            qtd_resposta = {
+                "Quantidade_Perguntas": new_resposta_id 
+            }
+
+            db_qtd_resposta.update(qtd_resposta)
+        
         stdscr.refresh()
 
     else:

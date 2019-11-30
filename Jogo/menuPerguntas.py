@@ -80,7 +80,7 @@ def show_perguntas_menu(stdscr, current_user, current_user_id):
 
             # Opcao Editar Pergunta
             elif current_row_idx == 1:
-            	show_editar_perguntas_menu(stdscr, current_user_id)
+            	show_editar_perguntas_menu(stdscr, current_user, current_user_id)
 
             stdscr.refresh()
 
@@ -97,7 +97,7 @@ def show_perguntas_menu(stdscr, current_user, current_user_id):
 
 # menu editar perguntas, onde as opcoes sao: Apagar Pergunta" "Alterar Pergunta" e "voltar"
 # esse menu entra na opcao editar perguntas do menu definido acima
-def show_editar_perguntas_menu(stdscr, current_user):
+def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
     # Menu com as opcoes para o jogo 
     menu_editar_perguntas = ('Apagar Pergunta', 'Alterar Pergunta', 'Voltar')
 
@@ -170,8 +170,12 @@ def show_editar_perguntas_menu(stdscr, current_user):
                     textPrint.print_center(stdscr, "Usuario ainda nao enviou perguntas")
 
                     stdscr.getch()
-                    
-            stdscr.refresh()
+
+                elif escolha != -2:
+                    stdscr.clear()
+                    perguntasActions.escreve_pergunta(stdscr, current_user, current_user_data, "Editar", escolha)
+        
+        stdscr.refresh()
 
         # Imprime o titulo do jogo
         menu.print_menu(stdscr, current_row_idx, menu_editar_perguntas)
