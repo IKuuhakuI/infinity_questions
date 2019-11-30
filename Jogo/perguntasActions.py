@@ -35,7 +35,7 @@ def adiciona_pergunta(stdscr, current_user_id, current_user_data):
                 stdscr.clear()
 
                 # Funcao que adiciona perguntas no jogo
-                escreve_pergunta(stdscr, current_user_id, current_user_data)
+                escreve_pergunta(stdscr, current_user_id, current_user_data, "Adicionar")
                 
                 stdscr.clear()
 
@@ -67,7 +67,7 @@ def editar_pergunta():
                 stdscr.clear()
 
                 # Funcao que adiciona perguntas no jogo
-                escreve_pergunta(stdscr, current_user_id, current_user_data)
+                #escreve_pergunta(stdscr, current_user_id, current_user_data, "Editar")
                 
                 stdscr.clear()
 
@@ -77,7 +77,8 @@ def editar_pergunta():
 
 ################### USER INFORMA A PERGUNTA #################
 
-def escreve_pergunta(stdscr, current_user_id, current_user_data):
+# Entada: interface grafica, id do user, dados do user. modo (Adicionar/ Editar)
+def escreve_pergunta(stdscr, current_user_id, current_user_data, mode):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
 
