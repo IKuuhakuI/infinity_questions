@@ -1,6 +1,5 @@
-#arquivo que contem funcoes que adicionam pergunta
-#para implementar isso no cogigo, basta chamar essa primeira funcao adiciona_pergunta
-#Esta faltando ligar a pergunta que o usuario enviou ao proprio perfil dele
+# Arquivo com funcionalidades referentes as
+# perguntas adicionadas por usuarios no jogo
 
 # Bibliotecas existentes
 import curses
@@ -47,9 +46,37 @@ def adiciona_pergunta(stdscr, current_user_id, current_user_data):
 ################### EDITAR PERGUNTAS #########################
 
 def editar_pergunta():
-    return 0
+    current_row_idx = 0
+
+    while True:   
+        screen.show_questions_rules_screen(stdscr, current_row_idx)
+
+        # Entrada do teclado
+        key = stdscr.getch()
+
+        # Navegar pelo menu
+        if actions.keyboard(key) == 'left' and current_row_idx > 0:
+            current_row_idx -= 1
+        elif actions.keyboard(key) == 'right' and current_row_idx < 1:
+            current_row_idx += 1
+
+        # Caso selecione uma opcao
+        elif actions.keyboard(key) == 'enter':
+            # Caso selecione continuar
+            if current_row_idx == 0:
+                stdscr.clear()
+
+                # Funcao que adiciona perguntas no jogo
+                escreve_pergunta(stdscr, current_user_id, current_user_data)
+                
+                stdscr.clear()
+
+            # Caso selecione voltar
+            else:
+                break
 
 ################### USER INFORMA A PERGUNTA #################
+
 def escreve_pergunta(stdscr, current_user_id, current_user_data):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
