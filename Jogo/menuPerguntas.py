@@ -80,7 +80,7 @@ def show_perguntas_menu(stdscr, current_user, current_user_id):
 
             # Opcao Editar Pergunta
             elif current_row_idx == 1:
-            	show_editar_perguntas_menu(stdscr, current_user_data)
+            	show_editar_perguntas_menu(stdscr, current_user_id)
 
             stdscr.refresh()
 
@@ -117,6 +117,7 @@ def show_editar_perguntas_menu(stdscr, current_user):
 
     # Pega os dados do usuario que esta logado
     current_user_data = getData.get_user_data(current_user)
+
     current_user_name = current_user_data["Name"] 
     current_user_high_score = current_user_data["Highscore"]
 
@@ -178,3 +179,42 @@ def show_editar_perguntas_menu(stdscr, current_user):
 
         textPrint.print_title(stdscr)
 
+def show_all_questions(stdscr, current_user_id, mode):
+    curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+    stdscr.attron(curses.color_pair(1))
+    
+    current_page_index = 0
+
+    questions = getData.get_user_questions_data(current_user_id)
+
+    text_questions_ids = perguntasActions.get_questions_ids(questions)
+
+    pages = perguntasActions.get_questions_pages(text_questions_ids)
+    quantidade_paginas = len(pages)
+
+    while True:
+        current_page = pages[current_page_index]
+        page_with_numbers = perguntasActions.add_question_number_on_page(current_page)
+
+        textPrint.print_multi_lines(stdscr, page_with_numbers, len(page_with_numbers))
+        textPrint.print_title(stdscr)
+        stdscr.refresh()
+
+        key = stdscr.getch()
+
+        if actions.verify_exit(key) == True:
+            break
+
+        elif actions.verify_next(key) == True and current_page_index < quantidade_paginas - 1:
+            current_page_index += 1
+
+        elif actions.verify_back(key) == True and current_page_index > 0:
+            current_page_index -= 1
+
+        stdscr.clear()
+
+def test(stdscr):
+    show_all_questions(stdscr, 1, 0)
+
+curses.wrapper(test)

@@ -1,17 +1,17 @@
 import curses
 
 def verify_exit(entrada):
-    if entrada == "/exit":
+    if entrada == "/exit" or entrada in [69, 101]:
         return True
     return False
 
 def verify_back(entrada):
-	if entrada ==  "/back":
+	if entrada in [66, 98]:
 		return True
 	return False
 
 def verify_next(entrada):
-	if entrada == "/next":
+	if entrada in [78, 110]:
 		return True
 	return False
 

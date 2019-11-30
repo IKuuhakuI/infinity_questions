@@ -14,7 +14,6 @@ import textPrint
 def start_screen():
     # Windows 
     if os.name == "nt":
-        
         screen.resize_screen_windows()
     # Linux
     else:

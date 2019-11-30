@@ -351,7 +351,7 @@ def escreve_respostas(stdscr):
             exitRegister = True
             break
 
-        curses.echo(False)
+        #curses.echo(False)
     
         user_trueFalseA = stdscr.getstr(y_trueFalseA, x_trueFalseA + len(trueFalseA_label),50)
         user_trueFalseA = user_trueFalseA.decode("utf-8")
@@ -520,12 +520,26 @@ def get_questions_pages(questions):
     return lista_perguntas
 
 ########## RETORNA OS IDS DAS PERGUNTAS DOS USERS ###################
-def get_questions_values(questions):
+def get_questions_ids(questions):
     quantidade_perguntas = len(questions)
 
     questions_ids = []
 
     for pergunta_atual in range(1, quantidade_perguntas):
-        questions_ids.append(questions[str(pergunta_atual)])
+        text_pegunta_atual = str(questions[str(pergunta_atual)])
+
+        questions_ids.append(text_pegunta_atual)
 
     return questions_ids
+
+def add_question_number_on_page(current_page):
+    tamanho = len(current_page)
+
+    page_with_number = []
+
+    for linha in range(tamanho):
+        text = str(linha + 1) + " - " + current_page[linha]
+
+        page_with_number.append(text)
+
+    return page_with_number
