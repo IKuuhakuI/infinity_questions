@@ -164,8 +164,7 @@ def show_editar_perguntas_menu(stdscr, current_user):
 
             # Opcao Alterar Pergunta
             elif current_row_idx == 1:
-                textPrint.print_center(stdscr, "FALTA ESSA PARTE DO JOGO")
-                stdscr.getch()
+                show_all_questions(stdscr, current_user, "Editar")
 
             stdscr.refresh()
 
