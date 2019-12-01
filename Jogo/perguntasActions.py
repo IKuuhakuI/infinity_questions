@@ -488,6 +488,10 @@ def escreve_respostas(stdscr, question_id, mode):
     else:
         return False
 
+########## DELETA UMA PERGUNTA DO BANCO DE DADOS ######################
+def delete_questions(current_user_id):       
+    print("")
+
 ########## ORDENA PERGUNTAS PARA SEREM MOSTRADAS DE 8 EM 8 ############
 def get_questions_pages(questions):
     tamanho = len(questions)

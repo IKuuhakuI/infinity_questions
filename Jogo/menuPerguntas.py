@@ -155,13 +155,51 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
             if current_row_idx == len(menu_editar_perguntas) - 1:
                 break
 
-            # Opcao Apagar Pergunta
+            ### Opcao Apagar Pergunta ##############
             elif current_row_idx == 0:
-            	textPrint.print_center(stdscr, "FALTA CRIAR ESSA PARTE DO JOGO")
-            	stdscr.getch()
-                
+                current_row_idx = 0
 
-            # Opcao Alterar Pergunta
+                while True:
+                    screen.show_questions_rules_screen(stdscr,current_row_idx)
+
+                    # Entrada do teclado
+                    key = stdscr.getch()
+
+                    # Navegar pelo menu
+                    if actions.keyboard(key) == 'left' and current_row_idx > 0:
+                        current_row_idx -= 1
+                    elif actions.keyboard(key) == 'right' and current_row_idx < 1:
+                        current_row_idx += 1
+
+                    # Caso selecione uma opcao
+                    elif actions.keyboard(key) == 'enter':
+                        # Caso selecione continuar
+                        if current_row_idx == 0:
+                            stdscr.clear()
+
+                            escolha = show_all_questions(stdscr, current_user, "Apagar")
+
+                            if escolha == -1:
+                                stdscr.clear()
+                                textPrint.print_center(stdscr, "Usuario ainda nao enviou perguntas")
+
+                                stdscr.getch()
+
+                            elif escolha != -2:
+                                stdscr.clear()
+
+                                pergunta_text = getData.get_one_question_data(escolha)
+
+                                warning = ["Aperte 's' para confirmar que deseja deletar a seguinte pergunta:", pergunta_text, "Para cancelar, aperte qualquer outra tecla"]
+
+                                textPrint.print_multi_lines(stdscr, warning, len(warning))
+
+                                stdscr.getch()
+                        else:
+                            current_row_idx = 0
+                            break
+
+            ### Opcao Alterar Pergunta##############
             elif current_row_idx == 1:
                 current_row_idx = 0
 
@@ -194,6 +232,8 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
                             elif escolha != -2:
                                 stdscr.clear()
                                 perguntasActions.escreve_pergunta(stdscr, current_user, current_user_data, "Editar", escolha)
+
+
 
                         # Caso selecione voltar
                         else:
@@ -253,6 +293,7 @@ def show_all_questions(stdscr, current_user_id, mode):
 
         key = stdscr.getch()
 
+        # Caso user queira sair
         if actions.verify_exit(key) == True:
             return -2
 
@@ -270,6 +311,7 @@ def show_all_questions(stdscr, current_user_id, mode):
             
             stdscr.clear()
 
+        # Retorna a pergunta selecionada
         elif actions.verify_which_question(key) != -1 and actions.verify_which_question(key) < len(current_page) + 1:
             return pages_id[current_page_index][actions.verify_which_question(key)-1]
 
