@@ -21,8 +21,6 @@ def get_user_data(user_id):
 
     current_user_data = db_current_user_data.child("Users").child(user_id).get().val()
 
-    print(current_user_data)
-
     return current_user_data.copy()
 
 ########## COLOCA PERGUNTAS EM ORDEM ALEATORIA ############
@@ -34,9 +32,10 @@ def random_questions(question_list):
 def create_question_list(question_list):
     final_list = []
     for idx in range(len(question_list)):
-        dict_quest = {"Id":idx + 1,
-                      "Pergunta":question_list[idx]["Pergunta"]}
-        final_list.append(dict_quest)
+        if question_list[idx]["Pergunta"] != 'nil':
+            dict_quest = {"Id":idx + 1,
+                          "Pergunta":question_list[idx]["Pergunta"]}
+            final_list.append(dict_quest)
 
     return final_list
 
@@ -58,8 +57,7 @@ def get_questions_data():
 
     question_list = db_questions.child('Perguntas').get().val()
 
-    if question_list[0] == None:
-        question_list.pop(0)
+    question_list.pop(0)
 
     final_list = create_question_list(question_list)
 
