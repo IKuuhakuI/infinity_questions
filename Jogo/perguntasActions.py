@@ -508,19 +508,47 @@ def delete_question(question_id, current_user_id):
     for idx in range(1, len(user_questions)):
         print(type(user_questions[str(idx)]))
         print(type(question_id))
-        if int(user_questions[str(idx)]) == int(question_id):
+
+        if user_questions[str(idx)] == 'nil':
+            continue
+            
+        elif int(user_questions[str(idx)]) == int(question_id):
             remove_this_user_id = str(idx)
             print(remove_this_user_id)
             break
 
+
+    ######### ATUALIZA A QUESTAO APAGADA #################
     db_question = firebase.database()
-    question_to_delete = db_question.child("Perguntas").child(question_id).remove()
+    question_to_delete = db_question.child("Perguntas").child(question_id)
+
+    question_to_delete = {
+        "Pergunta":'nil'
+    }
+
+    ######### ATUALIZA COM A QUESTAO APAGADA NO USER #####
+
+    db_question.update(question_to_delete)
 
     db_user_question_id = firebase.database()
-    user_question_id = db_user_question_id.child("Users").child(current_user_id).child("Questions").child(remove_this_user_id).remove()
+    user_question_id = db_user_question_id.child("Users").child(current_user_id).child("Questions")
+
+    user_question_id = {
+        remove_this_user_id:'nil'
+    }
+
+    db_user_question_id.update(user_question_id)
+
+    ######## ATUALIZA COM A QUESTAO APAGADA NAS RESPOSTA ####
 
     db_answer = firebase.database()
-    db_answer_to_delete = db_answer.child("Respostas").child(question_id).remove()
+    answer_to_delete = db_answer.child("Respostas").child(question_id)
+
+    answer_to_delete = {
+        "Pergunta":'nil'
+    }
+
+    db_answer.update(answer_to_delete)
 
 ########## ORDENA PERGUNTAS PARA SEREM MOSTRADAS DE 8 EM 8 ############
 def get_questions_pages(questions):
