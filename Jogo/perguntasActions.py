@@ -506,15 +506,11 @@ def delete_question(question_id, current_user_id):
     remove_this_user_id = 0
 
     for idx in range(1, len(user_questions)):
-        print(type(user_questions[str(idx)]))
-        print(type(question_id))
-
         if user_questions[str(idx)] == 'nil':
             continue
             
         elif int(user_questions[str(idx)]) == int(question_id):
             remove_this_user_id = str(idx)
-            print(remove_this_user_id)
             break
 
 
@@ -579,9 +575,10 @@ def get_questions_ids(questions):
     questions_ids = []
 
     for pergunta_atual in range(1, quantidade_perguntas):
-        id_atual = str(questions[str(pergunta_atual)])
+        if questions[str(pergunta_atual)] != 'nil':
+            id_atual = str(questions[str(pergunta_atual)])
 
-        questions_ids.append(id_atual)
+            questions_ids.append(id_atual)
 
     return questions_ids
 

@@ -199,7 +199,14 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
                                 if confirm_key in [83, 115]:
                                     perguntasActions.delete_question(escolha, current_user)
 
-                                stdscr.getch()
+                                    stdscr.clear()
+
+                                    mensagem_sucesso = ['Pergunta deletada com sucesso', 'Aperte qualquer coisa para continuar']
+                                    textPrint.print_title(stdscr)
+                                    textPrint.print_multi_lines(stdscr,mensagem_sucesso,len(mensagem_sucesso))
+
+                                    stdscr.refresh()
+                                    stdscr.getch()
                         else:
                             current_row_idx = 0
                             break
