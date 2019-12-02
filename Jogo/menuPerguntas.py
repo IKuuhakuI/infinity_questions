@@ -194,6 +194,11 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
 
                                 textPrint.print_multi_lines(stdscr, warning, len(warning))
 
+                                confirm_key = stdscr.getch()
+
+                                if confirm_key in [83, 115]:
+                                    perguntasActions.delete_question(escolha, current_user)
+
                                 stdscr.getch()
                         else:
                             current_row_idx = 0

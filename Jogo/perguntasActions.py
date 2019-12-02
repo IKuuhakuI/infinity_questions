@@ -489,8 +489,38 @@ def escreve_respostas(stdscr, question_id, mode):
         return False
 
 ########## DELETA UMA PERGUNTA DO BANCO DE DADOS ######################
-def delete_questions(current_user_id):       
-    print("")
+def delete_question(question_id, current_user_id):       
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    firebase = pyrebase.initialize_app(config)
+
+    user_questions = getData.get_user_questions_data(current_user_id)
+    remove_this_user_id = 0
+
+    for idx in range(1, len(user_questions)):
+        print(type(user_questions[str(idx)]))
+        print(type(question_id))
+        if int(user_questions[str(idx)]) == int(question_id):
+            remove_this_user_id = str(idx)
+            print(remove_this_user_id)
+            break
+
+    db_question = firebase.database()
+    question_to_delete = db_question.child("Perguntas").child(question_id).remove()
+
+    db_user_question_id = firebase.database()
+    user_question_id = db_user_question_id.child("Users").child(current_user_id).child("Questions").child(remove_this_user_id).remove()
+
+    db_answer = firebase.database()
+    db_answer_to_delete = db_answer.child("Respostas").child(question_id).remove()
 
 ########## ORDENA PERGUNTAS PARA SEREM MOSTRADAS DE 8 EM 8 ############
 def get_questions_pages(questions):
