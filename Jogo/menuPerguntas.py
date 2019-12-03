@@ -284,6 +284,10 @@ def show_all_questions(stdscr, current_user_id, mode):
 
     questions_ids = perguntasActions.get_questions_ids(questions_data)
 
+    # Caso user nao tenha enviado perguntas
+    if len(questions_ids) == 0:
+        return -1
+
     questions = perguntasActions.get_question_list(questions_ids)
 
     pages_id = perguntasActions.get_questions_pages(questions_ids)
