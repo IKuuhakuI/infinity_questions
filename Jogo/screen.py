@@ -70,7 +70,35 @@ def show_questions_rules_screen(stdscr, current_row_idx):
 	menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
         
 	stdscr.refresh()
+###################REGRAS PARA EXCLUIR UMA PERGUNTA######################
+def show_erase_rules_screen(stdscr,current_row_idx):
+	continuar_voltar_menu = ('Continua', 'Voltar')
 
+	stdscr.clear()
+
+	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
+
+	stdscr.attron(curses.color_pair(1))
+
+	textPrint.print_title(stdscr)
+
+	linha1 = "Ok! Antes de comecar a excluir uma pergunta, leia as regras atentamente!"
+	linha2 = "Regras: "
+
+	linha3 = "1 - Ao excluir uma pergunta, voce deve informar o numero dela"
+	linha4 = "2 - Em seguida, voce ira informar se deseja realmente exclui-la"
+
+	regras_excluir = [linha1, linha2, linha3, linha4]
+
+	#Imprime as regras no centro da tela
+	textPrint.print_multi_lines(stdscr, regras_excluir, 4)
+
+	#Menu de continuar / voltar
+	menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
+
+	stdscr.refresh()
+	
 # Tela de novo recorde global 
 def show_new_global_record(stdscr, pontuacao):
 	textPrint.print_title(stdscr)

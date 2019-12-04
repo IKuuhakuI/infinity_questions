@@ -160,7 +160,7 @@ def show_editar_perguntas_menu(stdscr, current_user_data, current_user):
                 current_row_idx = 0
 
                 while True:
-                    screen.show_questions_rules_screen(stdscr,current_row_idx)
+                    screen.show_erase_rules_screen(stdscr,current_row_idx)
 
                     # Entrada do teclado
                     key = stdscr.getch()
