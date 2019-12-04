@@ -34,7 +34,7 @@ def show_welcome_screen(stdscr):
 
 ######### REGRAS DO JOGO #########################################
 def show_rules_screen(stdscr):
-	lista_texto_regras = ['Regras:', '1- Responda somente com (a), (b), (c) ou (d)', '2- Caso nao saiba responder e queira desistir, digite (g)', '3- Caso erre a resposta, o jogo acaba e voce nao ganha nenhum ponto', '4- Caso ganhe ou desista, a quatidade de pontos vai ser quantas peguntas voce acertou', 'Para continuar aperte qualuqer coisa...']
+	lista_texto_regras = ['Regras:', '1- Responda somente com (a), (b), (c) ou (d)', '2- Caso nao saiba responder e queira desistir, digite (g)', '3- Caso erre a resposta, o jogo acaba e voce nao ganha nenhum ponto', '4- Caso ganhe ou desista, a quatidade de pontos vai ser quantas peguntas voce acertou', 'Para continuar aperte qualquer coisa...']
 	linhas = 6
 	textPrint.print_multi_lines(stdscr, lista_texto_regras, linhas)
 	stdscr.getch()
@@ -72,7 +72,7 @@ def show_questions_rules_screen(stdscr, current_row_idx):
 	stdscr.refresh()
 ###################REGRAS PARA EXCLUIR UMA PERGUNTA######################
 def show_erase_rules_screen(stdscr,current_row_idx):
-	continuar_voltar_menu = ('Continua', 'Voltar')
+	continuar_voltar_menu = ('Continuar','Voltar')
 
 	stdscr.clear()
 
@@ -83,7 +83,7 @@ def show_erase_rules_screen(stdscr,current_row_idx):
 
 	textPrint.print_title(stdscr)
 
-	linha1 = "Ok! Antes de comecar a excluir uma pergunta, leia as regras atentamente!"
+	linha1 = "Ok! Antes de começar a excluir uma pergunta, leia as regras atentamente"
 	linha2 = "Regras: "
 
 	linha3 = "1 - Ao excluir uma pergunta, voce deve informar o numero dela"
@@ -98,7 +98,7 @@ def show_erase_rules_screen(stdscr,current_row_idx):
 	menu.horizontal_menu(stdscr, current_row_idx, continuar_voltar_menu)
 
 	stdscr.refresh()
-	
+
 # Tela de novo recorde global 
 def show_new_global_record(stdscr, pontuacao):
 	textPrint.print_title(stdscr)
