@@ -6,8 +6,7 @@
 <p>O objetivo do trabalho é criar um jogo de perguntas e respostas. Para isso, iremos utilizar o banco de dados do Google (Firebase) em conjunto com o nosso conhecimento de python e a biblioteca de interface gráfica Curses.</p>
 
 <H2> REQUISITOS </H2>
-<p> Para poder testar o nosso programa, você deve ter instalado as seguintes
-	bibliotecas em seu computador:
+<p> Para poder testar o nosso programa, você deve ter instalado as seguintes bibliotecas em seu computador (utilize Python 3):
 
 <b>Curses:</b> Essa biblioteca permite criarmos os menus. Para mais informações sobre ela, clique <a href = "https://github.com/zephyrproject-rtos/windows-curses">aqui</a>. Caso você esteja utilizando um sistema Linux, provavelmente você já
  possui essa biblioteca instalada. Caso esteja usando o windows utilize o seguinte comando:</p>
