@@ -3,7 +3,7 @@
 <H4> Grupo: Amanda Pereira da Silva, Luiz Carlos Aguiar Carrion, Maria Eduarda de Souza Mafra, Yuri Pereira Dantas </H4>
 
 <H2> OBJETIVO DO TRABALHO </H2>
-<p>O objetivo do trabalho é criar um jogo de perguntas e respostas. Para isso, iremos utilizar o banco de dados do Google (Firebase) em conjunto com o nosso conhecimento de python.</p>
+<p>O objetivo do trabalho é criar um jogo de perguntas e respostas. Para isso, iremos utilizar o banco de dados do Google (Firebase) em conjunto com o nosso conhecimento de python e a biblioteca de interface gráfica Curses.</p>
 
 <H2> REQUISITOS </H2>
 <p> Para poder testar o nosso programa, você deve ter instalado as seguintes
