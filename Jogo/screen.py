@@ -99,33 +99,7 @@ def show_erase_rules_screen(stdscr,current_row_idx):
 
 	stdscr.refresh()
 
-# Tela de novo recorde global 
-#def show_new_global_record(stdscr, pontuacao):
-#	textPrint.print_title(stdscr)
-#	lista_texto_global = ['Pontuacao: ' + str(pontuacao), 'Novo recorde global! Parabens!']
-#	linhas = 2
-#	textPrint.print_multi_lines(stdscr, lista_texto_global, linhas)
-#	botao = ["Continuar"]
-#	menu.std_btn(stdscr, 0, botao)
-#	key = stdscr.getch()
-#	while True:
-#		if actions.keyboard(key) == 'enter':
-#			break
-
-# Tela de novo recorde pessoal
-#def show_new_personal_record(stdscr, pontuacao):
-#	textPrint.print_title(stdscr)
-#	lista_texto_personal = ['Pontuacao: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!']
-#	linhas = 2
-#	textPrint.print_multi_lines(stdscr, lista_texto_personal, linhas)
-#	botao = ["Continuar"]
-#	menu.std_btn(stdscr, 0, botao)
-#	key = stdscr.getch()
-#	while True:
-#		if actions.keyboard(key) == 'enter':
-#			break
-
-
+# Tela de fim de jogo
 def show_end_screen(stdscr, pontuacao, personal_record, global_record):
 	curses.curs_set(0)
 	stdscr.clear()
@@ -178,49 +152,6 @@ def show_end_screen(stdscr, pontuacao, personal_record, global_record):
 		if actions.keyboard(key) == 'enter':
 			break
 
-# Tela de novo recorde global e pessoal ao mesmo tempo
-#def show_new_global_personal_record(stdscr, pontuacao, posicao):
-#	curses.curs_set(0)
-#
-#	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
-#	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_GREEN)
-#	textPrint.print_title(stdscr)
-#	texto_global_pessoal = ['Pontuacao: ' + str(pontuacao), 'Novo recorde pessoal! Parabens!', 'Parabens voce consegui a ' + posicao + ' posicao global'  ]
-#	linhas = 3
-#	textPrint.print_multi_lines(stdscr, texto_global_pessoal, linhas)
-#	botao = ['Continuar']
-#	menu.std_btn(stdscr, 0, botao)
-#	key = stdscr.getch()
-#	while True:
-#		if actions.keyboard(key) == 'enter':
-#			break
-
-#def show_new_posicao_record(stdscr, pontuacao, posicao):
-#	textPrint.print_title(stdscr)
-#	lista_texto_global = ['Pontuacao: ' + str(pontuacao),'Parabens voce consegui a ' + posicao + ' posicao global' ]
-#	linhas = 2
-#	textPrint.print_multi_lines(stdscr, lista_texto_global, linhas)
-#	botao = ["Continuar"]
-#	menu.std_btn(stdscr, 0, botao)
-#	key = stdscr.getch()
-#	while True:
-#		if actions.keyboard(key) == 'enter':
-#			break
-
-
-# Tela caso nao consiga nenhum novo recorde
-#def show_nenhum_recorde(stdscr, pontuacao, recorde_global, recorde_pessoal):
-#	textPrint.print_title(stdscr)
-#	lista_texto_sem_recorde = ['Fim de Jogo :(','Pontuacao: ' + str(pontuacao), 'Que tal tentar mais uma vez? Talvez voce consiga quebrar o recorde atual!', 'Recorde global :' + str(recorde_global), 'Recorde pessoal :' + str(recorde_pessoal)]
-#	linhas = 5
-#	textPrint.print_multi_lines(stdscr, lista_texto_sem_recorde, linhas)
-#	botao = ["continuar"]
-#	menu.std_btn(stdscr, 0, botao)
-#	key = stdscr.getch()
-#	while True:
-#		if actions.keyboard(key) == 'enter':
-#			break
-	
 # Tela de "deseja sair"
 def show_deseja_sair(stdscr):
 	curses.curs_set(0)
