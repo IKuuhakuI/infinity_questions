@@ -175,3 +175,25 @@ def set_user_high_score(current_score, current_high_score, current_user_id):
         return True
 
     return False
+
+def retorna_global_record(stdscr):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    # Conexao com o Firebase
+    firebase = pyrebase.initialize_app(config)
+    
+    # Pegando no banco de dados o Highscore Global:
+    db_high_score = firebase.database()
+    recorde_global = db_high_score.child("Highscore").child("1").child("valor").get().val()
+
+    # retornando esse highscore
+    return recorde_global
+

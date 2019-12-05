@@ -124,10 +124,31 @@ def final_game(stdscr, current_user_name, current_user_id, current_user_high_sco
     globalRecord = scoreboard.update_scoreboard(top_5_list, pontos, current_user_name)
     personalRecord = scoreboard.set_user_high_score(pontos, current_user_high_score, current_user_id)
 
-    # Texto com a pontuacao feita pelo jogador
-    pontuacao_final = "Pontuacao final: " + str(pontos)
 
-    stdscr.clear()
-    textPrint.print_center(stdscr, pontuacao_final)
-    textPrint.print_title(stdscr)
-    stdscr.getch()
+    # Logica para imprimir na tela mensagens com a pontuacao e as congratulaçoes caso haja novo recorde pessoal ou global, ou se nao houver novo recorde 
+
+    if globalRecord == "First" and personalRecord == True:
+        stdscr.clear()
+        screen.show_new_global_personal_record(stdscr, pontos)
+
+    elif globalRecord == "First" and personalRecord == False: 
+        stdscr.clear()
+        screen.show_new_global_record(stdscr, pontos)
+
+    elif globalRecord != "First" and personalRecord == True:
+        stdscr.clear()
+        screen.show_new_personal_record(stdscr, pontos)
+
+    elif globalRecord != "First" and personalRecord == False:
+        
+        recordeGlobal = scoreboard.retorna_global_record(stdscr)
+        stdscr.clear()
+
+        screen.show_nenhum_recorde(stdscr, pontos, recordeGlobal, current_user_high_score)
+
+
+        #stdscr.clear()
+        #pontuacao_final = str(pontos)
+        #textPrint.print_center(stdscr, pontuacao_final)
+        #textPrint.print_title(stdscr)
+        #stdscr.getch()
