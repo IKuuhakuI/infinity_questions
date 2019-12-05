@@ -197,3 +197,24 @@ def retorna_global_record(stdscr):
     # retornando esse highscore
     return recorde_global
 
+def retorna_personal_record(stdscr, current_user_id):
+    config = {
+        "apiKey": "AIzaSyBrarBhWJSP3FnNJurEAtrbmUb1fG_wZFs",
+        "authDomain": "teste-python-67d43.firebaseapp.com",
+        "databaseURL": "https://teste-python-67d43.firebaseio.com",
+        "projectId": "teste-python-67d43",
+        "storageBucket": "",
+        "messagingSenderId": "581051665954",
+        "appId": "1:581051665954:web:6f131448200a100689447b"
+    }
+
+    # Conexao com o Firebase
+    firebase = pyrebase.initialize_app(config)
+    
+    # Pegando no banco de dados o Highscore Pessoal:
+    db_user_high_score = firebase.database()
+    recorde_pessoal = db_user_high_score.child("Users").child(current_user_id).child("Highscore").get().val()
+
+    # retornando esse highscore
+    return recorde_pessoal
+

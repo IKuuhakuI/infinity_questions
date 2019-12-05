@@ -134,27 +134,27 @@ def final_game(stdscr, current_user_name, current_user_id, current_user_high_sco
     if globalRecord == "First":
         stdscr.clear()
         screen.show_new_global_record(stdscr, pontos)
-        return pontos
+      
 
     elif globalRecord == "Second" and personalRecord == True: 
         stdscr.clear()
         screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
-        return pontos
+       
 
     elif globalRecord == "Third" and personalRecord == True: 
         stdscr.clear()
         screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
-        return pontos
+       
 
     elif globalRecord == "Fourth" and personalRecord == True: 
         stdscr.clear()
         screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
-        return pontos
+    
 
     elif globalRecord == "Fifth" and personalRecord == True: 
         stdscr.clear()
         screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
-        return pontos
+    
 
     elif globalRecord == "First" and personalRecord == False: 
         stdscr.clear()
@@ -180,15 +180,15 @@ def final_game(stdscr, current_user_name, current_user_id, current_user_high_sco
     elif globalRecord == None and personalRecord == True:
         stdscr.clear()
         screen.show_new_personal_record(stdscr, pontos)
-        return pontos
-
+       
     else:
     #elif globalRecord != None and personalRecord == False:
         
         recordeGlobal = scoreboard.retorna_global_record(stdscr)
+        recordePessoal = scoreboard.retorna_personal_record(stdscr, current_user_id)
         stdscr.clear()
 
-        screen.show_nenhum_recorde(stdscr, pontos, recordeGlobal, current_user_high_score)
+        screen.show_nenhum_recorde(stdscr, pontos, recordeGlobal, recordePessoal)
 
 
 
