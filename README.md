@@ -34,4 +34,3 @@
 
 <H2> MATERIAIS ADICIONAIS </H2>
 <p><b> Wireframe: </b>http://bit.ly/wireframe_infinity_questions</p>
-<p><b> Quadro do Trello: </b> https://trello.com/b/dDwasP0o/infinity-questions </p>
