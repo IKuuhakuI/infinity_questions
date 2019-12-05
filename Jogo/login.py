@@ -42,6 +42,10 @@ def start_login(stdscr):
     tentativas_restantes = 8
 
     while True:
+        wrong_pass = False
+        wrong_length = False
+        exit_user_name = True
+
         textPrint.print_title(stdscr)
         textPrint.print_bottom(stdscr, exitMessage)
 
@@ -99,26 +103,37 @@ def start_login(stdscr):
         textPrint.print_center(stdscr, "Aguarde...")
         stdscr.refresh()
 
-        # Loop que verifica se o user existe e se a senha e correta
-        for user_id in range(1, quantidade_users + 1):
-            # Conexao com o banco de dados
-            db_user_name = firebase.database()
-            db_user_pass = firebase.database()
-        
-            # Pega o usuario e senha atual no banco de dados
-            current_user_name = db_user_name.child("Users").child(user_id).child("Name").get().val()
-            current_user_pass = db_user_pass.child("Users").child(user_id).child("Pass").get().val()
-        
-            # Converte os dados para string
-            current_user_name = str(current_user_name)
-            current_user_pass = str(current_user_pass)
-        
-            # Caso o user exista e a senha esteja correta
-            if current_user_name == user_name and current_user_pass == user_password:
-                # Muda o estado para True
-                logged_in = True
+        if len(user_name) <= 3 or len(user_name) > 20 or len(user_password) <= 3 or len(user_password) > 20:
+            wrong_length = True
 
-                break
+        else:
+            # Loop que verifica se o user existe e se a senha e correta
+            for user_id in range(1, quantidade_users + 1):
+                # Conexao com o banco de dados
+                db_user_name = firebase.database()
+                db_user_pass = firebase.database()
+        
+                # Pega o usuario e senha atual no banco de dados
+                current_user_name = db_user_name.child("Users").child(user_id).child("Name").get().val()
+                current_user_pass = db_user_pass.child("Users").child(user_id).child("Pass").get().val()
+        
+                # Converte os dados para string
+                current_user_name = str(current_user_name)
+                current_user_pass = str(current_user_pass)
+        
+                # Caso o user exista e a senha esteja correta
+                if current_user_name == user_name and current_user_pass == user_password:
+                    # Muda o estado para True
+                    logged_in = True
+
+                    break
+
+                elif current_user_name == user_name:
+                    wrong_pass = True
+                    break
+
+                elif user_id == quantidade_users:
+                    exit_user_name = False
     
         # Limpa a tela
         stdscr.clear()
@@ -149,21 +164,33 @@ def start_login(stdscr):
 
             current_row_idx = 0
 
+            text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
+
+            tentar_novamente = "Deseja tentar novamente?"
+
+            if(tentativas_restantes == 0):
+                text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", tentar_novamente]
+            else:
+                text_error = ["ERRO AO EFETUAR LOGIN", text_tentativas, tentar_novamente]
+
+            if wrong_length == True:
+                text_wrong_length = "ERRO AO EFETUAR LOGIN: Nome de usuario e senha tem que ter entre 4 a 20 caracteres"
+                text_error[0] = text_wrong_length
+
+            if wrong_pass == True:
+                text_wrong_pass = "ERRO AO EFETUAR LOGIN: Senha incorreta"
+                text_error[0] = text_wrong_pass
+
+            if exit_user_name == False:
+                text_exist_user = "ERRO AO EFETUAR LOGIN: Usuario nao existe!"
+                text_error[0] = text_exist_user
+
             while True:
                 textPrint.print_title(stdscr)
 
                 menu.horizontal_menu(stdscr, current_row_idx, yes_no_menu)
 
-                text_tentativas = "Tentativas Restantes: " + str(tentativas_restantes)
-
-                tentar_novamente = "Deseja tentar novamente?"
-
-                if(tentativas_restantes == 0):
-                    text_error = ["ERRO AO EFETUAR LOGIN", "A tela ira bloquear por 1 minuto", tentar_novamente]
-                else:
-                    text_error = ["ERRO AO EFETUAR LOGIN", text_tentativas, tentar_novamente]
-
-                textPrint.print_multi_lines(stdscr, text_error, 3)
+                textPrint.print_multi_lines(stdscr, text_error, len(text_error))
                         
                 stdscr.refresh()
 
