@@ -23,7 +23,7 @@
 <p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. É necessário uma conexão com a internet para poder jogar.</p>
 
 <H2> REGRAS </H2>
-<p> Ao começar o jogo, teremos todas as perguntas do banco de dados sendo postas de forma aleatória. Um fator de dificuldade é o tempo. O usuário terá 20 segundos para responder cada pergunta. Caso ele acerte, ele avançará para a próxima. O objetivo é responder o máximo que ele conseguir. As perguntas são todas objetivas, restritas a 4 opções, sendo uma, e somente uma delas, correta. Caso ele erre, o jogo acaba.</p>
+<p> Ao começar o jogo, teremos todas as perguntas do banco de dados sendo postas de forma aleatória. Caso ele acerte uma pergunta, ele avançará para a próxima. Caso ele não saiba responder, ele pode desistir do jogo e ganhar uma pontuação equivalente a quantidade de respostas corretas. Caso ele erre, ele irá ganhar nenhum ponto, terminando o jogo. O objetivo é responder o máximo que ele conseguir. As perguntas são todas objetivas, restritas a 4 opções, sendo uma, e somente uma delas, correta.</p>
 
 <H2> FUNCIONALIDADES EXTRAS </H2>
 <p> Para deixar o jogo mais divertido, decidmos adicionar algumas funcionalidades. Após discutirmos sobre várias ideias, essas serão as que usaremos no jogo:<br>
