@@ -47,10 +47,6 @@ def show_game_menu(stdscr, current_user):
     stdscr.refresh()
 
     while True:
-
-        
-       
-
         key = stdscr.getch()
 
         stdscr.clear()
@@ -68,7 +64,6 @@ def show_game_menu(stdscr, current_user):
             textPrint.print_center(stdscr, 'enter')
 
             if current_row_idx == len(menu_jogo) - 1:
-
                 # Confirmar se deseja mesmo sair     
                 saiu = screen.show_deseja_sair(stdscr)      
                 
@@ -81,7 +76,8 @@ def show_game_menu(stdscr, current_user):
 
             elif current_row_idx == 0:
                 stdscr.clear()
-                play.final_game(stdscr, current_user_name, current_user, current_user_high_score)
+                current_user_high_score = play.final_game(stdscr, current_user_name, current_user, current_user_high_score)
+                data_list[1] = current_user_high_score
 
             elif current_row_idx == 1:
                  menuPerguntas.show_perguntas_menu(stdscr, current_user_data, current_user)
