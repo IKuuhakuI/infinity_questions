@@ -37,6 +37,8 @@ def start_registrar(stdscr):
 	yes_no_menu = ('Sim', 'Nao')
 
 	while True:
+		wrong_length = False
+
 		textPrint.print_bottom(stdscr, exitMessage)
 		textPrint.print_title(stdscr)
 
@@ -101,7 +103,6 @@ def start_registrar(stdscr):
 				isUnique = False
 				break
 
-
 		if isUnique == True and user_password == user_confirm_password and len(user_name) > 3 and len(user_name) <= 20 and len(user_password) > 3 and len(user_password) <= 20:
 			stdscr.clear()
 
@@ -117,14 +118,35 @@ def start_registrar(stdscr):
 		else:
 			stdscr.clear()
 
+			error_message = []
+
+			if len(user_name) <= 3 or len(user_name) > 20 or len(user_password) <= 3 or len(user_password) > 20:
+				wrong_length = True 
+
+			if user_password != user_confirm_password:
+				isDifferent = True
+
+			if isUnique == False:
+				warning_unique = "ERRO AO CRIAR USUARIO: Nome de Usuario ja existe!"
+				error_message.apeend(warning_unique)
+
+			if wrong_length == True:
+				warning_length = "ERRO AO CRIAR USUARIO: Usuario e Senha tem que ter entre 4 e 20 caracteres!"
+				error_message.append(warning_length)
+
+			if isDifferent == True:
+				warning_different = "ERRO AO CRIAR USUARIO: Senha e Confirmacao devem ser iguais!"
+				error_message.append(warning_different)
+
 			tentar_novamente = "Deseja tentar novamente?"
-			error_message = ["ERRO AO CRIAR USUARIO", tentar_novamente]
+
+			error_message.append(tentar_novamente)
 
 			current_row_idx = 0
 
 			while True:
 				textPrint.print_title(stdscr)
-				textPrint.print_multi_lines(stdscr, error_message, 2)
+				textPrint.print_multi_lines(stdscr, error_message, len(error_message))
 				menu.horizontal_menu(stdscr, current_row_idx, yes_no_menu)
 			
 				stdscr.refresh()
