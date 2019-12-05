@@ -37,7 +37,9 @@
 
 <b> Excluir perguntas: </b> Além de editar, os jogadores vão poder excluir suas próprias perguntas!
 
-<b> Sistema de Login e Scoreboard: </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 5 melhores pontuações e seus respectivos usuários.</p>
+<b> Sistema de Login e Scoreboard: </b> Pensando num fator mais competitivo, chegamos a conclusão de que uma funcionalidade que salve o progresso do jogador é essencial. Aproveitando essa ideia, decidimos que iremos criar um Scoreboard com as 5 melhores pontuações e seus respectivos usuários.
+
+<b> Recorde Pessoal: </b> Mantenha registrado o seu progresso! Com o recorde pessoal você pode ver qual foi a sua maior pontuação! Assim você pode se desafiar a ir melhor ainda! </p>
 
 <H2> MATERIAIS ADICIONAIS </H2>
 <p><b> Wireframe: </b>http://bit.ly/wireframe_infinity_questions</p>
