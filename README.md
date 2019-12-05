@@ -22,6 +22,9 @@
 
 <p> Todas as outras bibliotecas utilizadas já são instaladas junto com o Python. É necessário uma conexão com a internet para poder jogar.</p>
 
+<H2> PREPARANDO O AMBIENTE </H2>
+<p> Para poder jogar, o usuário deve primeiro ler a parte de requisitos e deve ter instalado em seu computador todas as bibliotecas que listamos. Por fim, ele deve utilizar o Python 3, ir na pasta Jogo e rodar o programa main.py! Após isso, é só se divertir! </p>
+
 <H2> REGRAS </H2>
 <p> Ao começar o jogo, teremos todas as perguntas do banco de dados sendo postas de forma aleatória. Caso ele acerte uma pergunta, ele avançará para a próxima. Caso ele não saiba responder, ele pode desistir do jogo e ganhar uma pontuação equivalente a quantidade de respostas corretas. Caso ele erre, ele irá ganhar nenhum ponto, terminando o jogo. O objetivo é responder o máximo que ele conseguir. As perguntas são todas objetivas, restritas a 4 opções, sendo uma, e somente uma delas, correta.</p>
 
