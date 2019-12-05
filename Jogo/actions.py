@@ -70,3 +70,15 @@ def keyboard(entrada):
 
     elif entrada == curses.KEY_ENTER or entrada in [10,13]:
         return 'enter'
+
+def verify_posicao(entrada):
+    if entrada == "First":
+        return '1ª'
+    elif entrada == "Second":
+        return '2ª'
+    elif entrada == "Third":
+        return "3ª"
+    elif entrada == "Fourth":
+        return "4ª"
+    elif entrada == "Fifth":
+        return "5ª"

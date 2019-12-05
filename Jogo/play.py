@@ -118,6 +118,10 @@ def final_game(stdscr, current_user_name, current_user_id, current_user_high_sco
         if hasGivenUp == True or hasLost == True:
             break
 
+    stdscr.clear()
+    textPrint.print_title(stdscr)
+    textPrint.print_center(stdscr, "Carregando...")
+    stdscr.refresh()
     # Alterar scoreboard e recorde pessoal
     top_5_list = scoreboard.get_top_5_high_score()
 
@@ -127,24 +131,65 @@ def final_game(stdscr, current_user_name, current_user_id, current_user_high_sco
 
     # Logica para imprimir na tela mensagens com a pontuacao e as congratulaçoes caso haja novo recorde pessoal ou global, ou se nao houver novo recorde 
 
-    if globalRecord == "First" and personalRecord == True:
+    if globalRecord == "First":
         stdscr.clear()
-        screen.show_new_global_personal_record(stdscr, pontos)
+        screen.show_new_global_record(stdscr, pontos)
+        return pontos
+
+    elif globalRecord == "Second" and personalRecord == True: 
+        stdscr.clear()
+        screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+        return pontos
+
+    elif globalRecord == "Third" and personalRecord == True: 
+        stdscr.clear()
+        screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+        return pontos
+
+    elif globalRecord == "Fourth" and personalRecord == True: 
+        stdscr.clear()
+        screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+        return pontos
+
+    elif globalRecord == "Fifth" and personalRecord == True: 
+        stdscr.clear()
+        screen.show_new_global_personal_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+        return pontos
 
     elif globalRecord == "First" and personalRecord == False: 
         stdscr.clear()
-        screen.show_new_global_record(stdscr, pontos)
+        screen.show_new_posicao_record(stdscr, pontos, actions.verify_posicao(globalRecord))
 
-    elif globalRecord != "First" and personalRecord == True:
+    elif globalRecord == "Second" and personalRecord == False: 
+        stdscr.clear()
+        screen.show_new_posicao_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+    
+    elif globalRecord == "Third" and personalRecord == False: 
+        stdscr.clear()
+        screen.show_new_posicao_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+    
+    elif globalRecord == "Fourth" and personalRecord == False: 
+        stdscr.clear()
+        screen.show_new_posicao_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+    
+    elif globalRecord == "Fifth" and personalRecord == False: 
+        stdscr.clear()
+        screen.show_new_posicao_record(stdscr, pontos, actions.verify_posicao(globalRecord))
+
+    
+    elif globalRecord == None and personalRecord == True:
         stdscr.clear()
         screen.show_new_personal_record(stdscr, pontos)
+        return pontos
 
-    elif globalRecord != "First" and personalRecord == False:
+    else:
+    #elif globalRecord != None and personalRecord == False:
         
         recordeGlobal = scoreboard.retorna_global_record(stdscr)
         stdscr.clear()
 
         screen.show_nenhum_recorde(stdscr, pontos, recordeGlobal, current_user_high_score)
+
 
 
         #stdscr.clear()
